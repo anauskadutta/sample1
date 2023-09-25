@@ -1,7 +1,10 @@
 # write a github actions yaml script to echo hello world
 
 name: Lint, Test and Deploy
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
