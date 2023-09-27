@@ -18,11 +18,11 @@ jobs:
     # - name: lint 
     #   run: npm run lint
     # - name: test
-    #   run: npm test
-    - name: call workflow
-      uses: ./.github/workflows/reusable.yml
+    #   run: npm test      
     - name: deploy
       run: echo "Deploying the code - HELLO WORLD"
+  print:
+    uses: ./.github/workflows/reusable.yml
 
 
   
