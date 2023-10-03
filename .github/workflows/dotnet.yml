@@ -6,7 +6,8 @@ name: .NET
 on:
   push:
     branches: main
-    paths-ignore: ./.github/workflows/codeql.yml
+    paths-ignore: 
+      - './.github/workflows/codeql.yml'
 
 jobs:
   build:
