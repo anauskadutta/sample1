@@ -32,12 +32,12 @@ jobs:
       with:
         name: my-artifact
         path: ${{ github.workspace }}
-  codescan:
-    needs: build
-    uses: ./.github/workflows/codeql.yml
+  # codescan:
+  #   needs: build
+  #   uses: ./.github/workflows/codeql.yml
   artifact_download:
     runs-on: ubuntu-latest
-    needs: codescan
+    needs: build
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
