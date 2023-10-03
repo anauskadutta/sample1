@@ -1,4 +1,4 @@
-namespace HelloWorld
+namespace sample1
 {
     class Program
     {
