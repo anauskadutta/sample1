@@ -10,6 +10,8 @@ namespace sample1
         }
 
         public static String FindWord(String word){
+            String password = "abcd123";
+            Console.WriteLine(password);
             if(word == "hi")
                 return word;
             return null;
