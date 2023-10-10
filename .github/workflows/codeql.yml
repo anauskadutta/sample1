@@ -1,6 +1,6 @@
-name: "CodeQL"
+name: "CodeQL Workflow"
 
-on: push
+on: workflow_dispatch
 
 jobs:
   analyze:
