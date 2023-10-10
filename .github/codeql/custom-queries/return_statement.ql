@@ -12,4 +12,4 @@ import csharp
 
 from ReturnStmt r
 where r.getExpr() instanceof NullLiteral
-select r
+select r, "This return statement returns 'null' value."
