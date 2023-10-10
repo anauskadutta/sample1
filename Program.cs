@@ -5,14 +5,14 @@ namespace sample1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            String word = FindWord("hello");
+            String word = FindWord("bye");
             Console.WriteLine(word);
         }
 
         public static String FindWord(String word){
-            String password = "abcd123";
-            Console.WriteLine(password);
             if(word == "hi")
+            {}
+            else
                 return word;
             return null;
         }
