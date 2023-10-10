@@ -2,6 +2,7 @@
  * @id cs/examples/return-statement
  * @name Return statements
  * @description Finds return statements that return 'null'.
+ * @kind problem
  * @tags return
  *       statement
  *       null
