@@ -10,8 +10,9 @@ namespace sample1
         }
 
         public static String FindWord(String word){
-            if(word == "hi")
-            {}
+            if(word == "hi"){
+
+            }
             else
                 return word;
             return null;
