@@ -16,13 +16,12 @@ namespace sample1
             } else {
                 try
                 {
-                    isWord = true;
+
                     Console.WriteLine("It is a word!");
                     return word;
                 }
                 finally
                 {
-                    isWord = false;
                 }
             }
             return null;
