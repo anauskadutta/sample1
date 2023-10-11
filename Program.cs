@@ -10,11 +10,21 @@ namespace sample1
         }
 
         public static String FindWord(String word){
+            bool isWord;
             if(word == "hi"){
 
+            } else {
+                try
+                {
+                    isWord = true;
+                    Console.WriteLine("It is a word!")
+                }
+                finally
+                {
+                    isWord = false;
+                    return word;
+                }
             }
-            else
-                return word;
             return null;
         }
     }
