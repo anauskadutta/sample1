@@ -17,12 +17,12 @@ namespace sample1
                 try
                 {
                     isWord = true;
-                    Console.WriteLine("It is a word!")
+                    Console.WriteLine("It is a word!");
+                    return word;
                 }
                 finally
                 {
                     isWord = false;
-                    return word;
                 }
             }
             return null;
