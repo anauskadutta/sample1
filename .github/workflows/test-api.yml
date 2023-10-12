@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - '**/test-api.yml'
+      - '**.sh'
       
 env:
     GH_TOKEN: ${{ github.token }}
