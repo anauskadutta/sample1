@@ -5,15 +5,17 @@ scanJson=$(gh api \
 
 echo "The list of code scan alerts is as follows: $scanJson"
 
-for alert in "$scanJson"; do
-        echo $alert["state"]
-        # echo "Alerts are printed here: $alert"
-        # state=$(echo $alert | jq -r '.state')
-        # echo "State: $state"
-        # if [ $state=="open" ]; then
-        #         issueTitle=${alert.most_recent_instance.message.text}
-        #         echo "Title: $issueTitle"
-        #         # gh issue create --title $issueTitle
-        #         # echo "GitHub issue created"
-        # fi
-done
+jq -r ".[] | .state" input.json
+
+# for alert in "$scanJson"; do
+#         echo $alert
+#         # echo "Alerts are printed here: $alert"
+#         # state=$(echo $alert | jq -r '.state')
+#         # echo "State: $state"
+#         # if [ $state=="open" ]; then
+#         #         issueTitle=${alert.most_recent_instance.message.text}
+#         #         echo "Title: $issueTitle"
+#         #         # gh issue create --title $issueTitle
+#         #         # echo "GitHub issue created"
+#         # fi
+# done
