@@ -3,11 +3,11 @@ scanJson=$(gh api \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         /repos/anauskadutta/sample1/code-scanning/alerts)
 
-echo "The list of code scan alerts is as follows:"
-cat alerts.json << $scanJson
+echo "The list of code scan alerts is as follows: $scanJson"
 
-
-# alertList=$(echo "$scanJson" | jq -r '.[]')
+echo "$scanJson" | jq -r '.[]' >> alerts.json
+echo "HERE BELOW"
+cat alerts.json
 
 for alert in ${scanJson[@]}; do
         # echo "Alerts are printed here: $alert"
