@@ -18,5 +18,7 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
                 echo "Title: $issueTitle"
                 # gh issue create --title $issueTitle
                 # echo "GitHub issue created"
+        else
+                echo "State is not open!!!"
         fi
 done
