@@ -9,7 +9,7 @@ echo "The list of code scan alerts is as follows: $scanJson"
 # echo "HERE BELOW"
 # echo "$scanObj"
 
-for alert in "${{ scanJson[@] }}"; do
+for alert in "$scanJson"; do
         echo $alert
         # echo "Alerts are printed here: $alert"
         # state=$(echo $alert | jq -r '.state')
