@@ -1,0 +1,21 @@
+name: Test REST API
+
+on:
+  push:
+    branches: 
+      - 'main'
+    paths:
+      - '**/test-api.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: List Code Scanning Alerts for a Repo
+      run: |
+        gh api \
+        -H "Accept: application/vnd.github+json" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        /repos/anauskadutta/sample1/code-scanning/alerts
