@@ -6,8 +6,7 @@ scanList=$(gh api \
 echo "The list of code scan alerts is as follows: $scanList"
 
 for alert in $scanList; do
-        # state=${alert.state}
-        state=$($alert | jq '.state' --raw-output)
+        state=$(echo $alert | jq '.state' --raw-output)
         echo "State: $state"
         # if [ $state=="open" ]; then
         #         issueTitle=${alert.most_recent_instance.message.text}
