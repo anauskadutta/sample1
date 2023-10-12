@@ -5,7 +5,7 @@ on:
     branches: 
       - 'main'
     paths-ignore:
-      - '**.ql'
+      - '**/codeql/**'
       - 'README.MD'
       - '**/codeql.yml'
 
