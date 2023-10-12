@@ -16,9 +16,7 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
         if [[ "$state" == "open" ]]; then
                 issueTitle=$(_jq '.most_recent_instance.message.text')
                 echo "Title: $issueTitle"
-                # gh issue create --title $issueTitle
-                # echo "GitHub issue created"
-        else
-                echo "State is not open!!!"
+                gh issue create --title $issueTitle
+                echo "GitHub issue created"
         fi
 done
