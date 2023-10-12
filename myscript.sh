@@ -5,7 +5,7 @@ scanJson=$(gh api \
 
 echo "The list of code scan alerts is as follows: $scanJson"
 
-scanObj=$($scanJson | jq -r '.[]')
+scanObj=$(echo $scanJson | jq -r '.[]')
 echo "HERE BELOW"
 echo "$scanObj"
 
