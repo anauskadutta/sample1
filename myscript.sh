@@ -11,7 +11,7 @@ echo "The list of code scan alerts is as follows: $scanJson"
 
 for alert in $scanJson; do
         # echo "Alerts are printed here: $alert"
-        state=$(echo "$alert" | jq -r 'state')
+        state=$(echo "$alert" | jq -r '.state')
         echo "State: $state"
         # if [ $state=="open" ]; then
         #         issueTitle=${alert.most_recent_instance.message.text}
