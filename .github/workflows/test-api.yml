@@ -6,7 +6,10 @@ on:
       - 'main'
     paths:
       - '**/test-api.yml'
-
+      
+env:
+    GH_TOKEN: ${{ github.token }}
+    
 jobs:
   build:
     runs-on: ubuntu-latest
