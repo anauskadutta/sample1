@@ -1,7 +1,8 @@
 scanJson=$(gh api \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        /repos/anauskadutta/sample1/code-scanning/alerts)
+        /repos/anauskadutta/sample1/code-scanning/alerts \
+        | jq -r .)
 
 echo "The list of code scan alerts is as follows: $scanJson"
 
@@ -9,7 +10,7 @@ echo "The list of code scan alerts is as follows: $scanJson"
 # echo "HERE BELOW"
 # echo "$scanObj"
 
-for alert in "$scanJson"; do
+for alert in [ $scanJson ]; do
         echo $alert
         # echo "Alerts are printed here: $alert"
         # state=$(echo $alert | jq -r '.state')
