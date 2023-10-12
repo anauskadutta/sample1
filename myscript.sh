@@ -6,10 +6,10 @@ scanList=$(gh api \
 echo "The list of code scan alerts is as follows: $scanList"
 
 for alert in $scanList; do
-        state=$(alert.state)
+        state=$($alert.state)
         echo "State: $state"
         if [ $state=="open" ]; then
-                issueTitle=$(alert.most_recent_instance.message.text)
+                issueTitle=$($alert.most_recent_instance.message.text)
                 echo "Title: $issueTitle"
                 # gh issue create --title $issueTitle
                 # echo "GitHub issue created"
