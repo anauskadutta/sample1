@@ -5,11 +5,11 @@ scanJson=$(gh api \
 
 echo "The list of code scan alerts is as follows: $scanJson"
 
-alertList=$(echo "$scanJson" | jq -c -r '.[]')
+# alertList=$(echo "$scanJson" | jq -c -r '.[]')
 
-for alert in $alertList; do
+for alert in $scanJson; do
         # echo "Alerts are printed here: $alert"
-        state=$(echo "$alert" | jq -r '.[]' | '.state')
+        state=$(echo "$scanJson" | jq -c -r '.[]' | '.state')
         # echo "State: $state"
         # if [ $state=="open" ]; then
         #         issueTitle=${alert.most_recent_instance.message.text}
