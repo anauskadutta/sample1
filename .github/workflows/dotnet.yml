@@ -9,6 +9,7 @@ on:
       - 'README.MD'
       - '**/codeql.yml'
       - '**/test-api.yml'
+      - '**.sh'
 
 jobs:
   build:
