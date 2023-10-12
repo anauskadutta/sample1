@@ -5,7 +5,7 @@ namespace sample1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            String word = FindWord("bye");
+            String word = FindWord("byee");
             Console.WriteLine(word);
         }
 
