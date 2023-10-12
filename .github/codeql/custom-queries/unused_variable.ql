@@ -11,4 +11,4 @@ import csharp
 
 from Variable v
 where not exists(v.getAnAccess())
-select v, "This variable is not accessed."
+select v, "This variable is not accessed anywhere."
