@@ -5,7 +5,7 @@ scanList=$(gh api \
 
 echo "The list of code scan alerts is as follows: $scanList"
 
-for alert in $scanList; do
+for alert in $(echo "$scanList" | jq -r '.[]'); do
         state=$(echo $alert | jq '.state' --raw-output)
         echo "State: $state"
         # if [ $state=="open" ]; then
