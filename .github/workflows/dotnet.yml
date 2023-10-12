@@ -7,7 +7,7 @@ on:
     paths-ignore:
       - '**/codeql/**'
       - 'README.MD'
-      - '**/codeql.yml'
+      - '!**/dotnet.yml'
 
 jobs:
   build:
