@@ -9,7 +9,7 @@ bodyList=$(gh api \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         /repos/anauskadutta/sample1/issues \
-        --jq '.[].body)
+        --jq '.[].body')
 
 echo "List of GitHub Issue Body Contents: $bodyList"
 
