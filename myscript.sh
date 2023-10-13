@@ -12,10 +12,11 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
         state=$(_jq '.state')
         # echo "Alerts are printed here: $alert"
         # state=$(echo $alert | jq -r '.state')
-        echo "State: $state"
+        # echo "State: $state"
         if [[ "$state" == "open" ]]; then
                 issueTitle="$(_jq '.most_recent_instance.message.text')"
-                issueBody=$(_jq '.instances_url')
+                issueBody=$(_jq '.html_url')
+                echo "State: $state"
                 echo "Title: $issueTitle"
                 echo "Body: $issueBody"
                 ghIssue=$(gh issue create --title "$issueTitle" --body "$issueBody")
