@@ -1,12 +1,12 @@
-name: Test REST API
+name: Create GitHub Issue
 
-on:
-  push:
-    branches: 
-      - 'main'
-    paths:
-      - '**/test-api.yml'
-      - '**.sh'
+on: workflow_call
+  # push:
+  #   branches: 
+  #     - 'main'
+  #   paths:
+  #     - '**/test-api.yml'
+  #     - '**.sh'
       
 env:
     GH_TOKEN: ${{ github.token }}
@@ -23,9 +23,8 @@ jobs:
       run:
         shell: bash
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
     
-    - name: Run script (List Code Scanning Alerts for a Repo)
-      run: bash ./myscript.sh
-        # chmod=+x ./myscript.sh
-        # ./myscript.sh
+    - name: Run script to create GitHub Issues for CodeQL Scan Vulnerabilities
+      run: bash ./github/scripts/myscript.sh
