@@ -13,6 +13,12 @@ bodyList=$(gh api \
 
 echo "List of GitHub Issue Body Contents: $bodyList"
 
+if [[ "https://github.com/anauskadutta/sample1/security/code-scanning/1" in $bodyList ]]; then
+        echo "Issue already exists"
+else
+        echo "Creating issue..."
+fi
+
 # for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
 #         _jq() {
 #                 echo ${alert} | base64 --decode | jq -r ${1}
