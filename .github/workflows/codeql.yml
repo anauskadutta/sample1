@@ -42,3 +42,8 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
+
+  map_vulnerabilities_with_issue:
+    name: Create GitHub Issues
+    needs: analyze
+    uses: ./.github/workflows/test-api.yml
