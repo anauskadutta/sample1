@@ -14,9 +14,10 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
         # state=$(echo $alert | jq -r '.state')
         echo "State: $state"
         if [[ "$state" == "open" ]]; then
-                issueTitle=$(_jq '.most_recent_instance.message.text')
+                issueTitle="$(_jq '.most_recent_instance.message.text')"
+                issueBody=$(_jq '.instances_url')
                 echo "Title: $issueTitle"
-                gh issue create --title $issueTitle
-                echo "GitHub issue created"
+                ghIssue=$(gh issue create --title $issueTitle --body $issueBody)
+                echo "GitHub issue created: $ghIssue"
         fi
 done
