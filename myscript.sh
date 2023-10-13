@@ -3,7 +3,7 @@ scanJson=$(gh api \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         /repos/anauskadutta/sample1/code-scanning/alerts)
 
-echo "The list of code scan alerts is as follows: $scanJson"
+# echo "The list of code scan alerts is as follows: $scanJson"
 
 for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
         _jq() {
@@ -18,7 +18,7 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
                 issueBody=$(_jq '.instances_url')
                 echo "Title: $issueTitle"
                 echo "Body: $issueBody"
-                # ghIssue=$(gh issue create --title $issueTitle --body $issueBody)
-                # echo "GitHub issue created: $ghIssue"
+                ghIssue=$(gh issue create --title "$issueTitle" --body "$issueBody")
+                echo "GitHub issue created: $ghIssue"
         fi
 done
