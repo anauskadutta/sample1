@@ -17,7 +17,8 @@ for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
                 issueTitle="$(_jq '.most_recent_instance.message.text')"
                 issueBody=$(_jq '.instances_url')
                 echo "Title: $issueTitle"
-                ghIssue=$(gh issue create --title $issueTitle --body $issueBody)
-                echo "GitHub issue created: $ghIssue"
+                echo "Body: $issueBody"
+                # ghIssue=$(gh issue create --title $issueTitle --body $issueBody)
+                # echo "GitHub issue created: $ghIssue"
         fi
 done
