@@ -1,16 +1,17 @@
-scanJson=$(gh api \
-        -H "Accept: application/vnd.github+json" \
-        -H "X-GitHub-Api-Version: 2022-11-28" \
-        /repos/anauskadutta/sample1/code-scanning/alerts)
+# scanJson=$(gh api \
+#         -H "Accept: application/vnd.github+json" \
+#         -H "X-GitHub-Api-Version: 2022-11-28" \
+#         /repos/anauskadutta/sample1/code-scanning/alerts)
 
 # echo "The list of code scan alerts is as follows: $scanJson"
 
-issueJson=$(gh api \
+bodyList=$(gh api \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        /repos/anauskadutta/sample1/issues)
+        /repos/anauskadutta/sample1/issues \
+        --jq '.[].body)
 
-echo "List of GitHub Issues: $issueJson"
+echo "List of GitHub Issue Body Contents: $bodyList"
 
 # for alert in $(echo "$scanJson" | jq -r '.[] | @base64'); do
 #         _jq() {
@@ -26,7 +27,11 @@ echo "List of GitHub Issues: $issueJson"
 #                 echo "State: $state"
 #                 echo "Title: $issueTitle"
 #                 echo "Body: $issueBody"
-#                 ghIssue=$(gh issue create --title "$issueTitle" --body "$issueBody")
-#                 echo "GitHub issue created: $ghIssue"
+#                 if [[ "$issueBody" in $bodyList ]]; then
+#                         echo "Issue already exists"
+#                 else
+#                         ghIssue=$(gh issue create --title "$issueTitle" --body "$issueBody")
+#                         echo "GitHub issue created: $ghIssue"
+#                 fi
 #         fi
 # done
