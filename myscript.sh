@@ -13,7 +13,7 @@ bodyList=$(gh api \
 
 echo "List of GitHub Issue Body Contents: $bodyList"
 
-if [[ "https://github.com/anauskadutta/sample1/security/code-scanning/1" in $bodyList ]]; then
+if [[ $bodyList =~ "https://github.com/anauskadutta/sample1/security/code-scanning/1" ]]; then
         echo "Issue already exists"
 else
         echo "Creating issue..."
