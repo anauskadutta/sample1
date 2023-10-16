@@ -1,8 +1,8 @@
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    paths:
+      - '**/create-jira-ticket.yml'
 
 name: Create Jira Ticket
 
