@@ -17,7 +17,10 @@ r = requests.get(url, headers=headers)
 print(f"Status code: {r.status_code}")
 
 # store API response to variable
-response_dict = r.json()
+response = r.json()
 
 # process results
-print(response_dict)
+print(response)
+
+for issue in response:
+  print("Title: {issue.title}")
