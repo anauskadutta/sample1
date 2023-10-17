@@ -19,8 +19,12 @@ print(f"Status code: {r.status_code}")
 # store API response to variable
 response = r.json()
 
-# process results
-print(response)
+# # process results
+# print(response)
 
-for issue in response:
-  print("Title: {issue.title}")
+issue_dicts = response['items']
+
+print(f"Total GitHub issues returned: {len(issue_dicts)}")
+
+# for issue in response:
+#   print("Title: {issue.title}")
