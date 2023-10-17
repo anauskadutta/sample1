@@ -27,4 +27,4 @@ response = r.json()
 print(f"Total GitHub issues returned: {len(response)}")
 
 for issue in response:
-  print("Title: {issue['title']}")
+  print(issue['title'])
