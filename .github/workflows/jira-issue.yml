@@ -19,18 +19,26 @@ on:
         type: string
         description: Issue description
         required: true
-    outputs:
-      issue:
-        description: Details of created Jira issue
-        value: ${{ jobs.create_issue.outputs.job_output }}
+    # outputs:
+    #   issue:
+    #     description: Details of created Jira issue
+    #     value: ${{ jobs.create_issue.outputs.job_output }}
 
 jobs:
   create_issue:
     runs-on: ubuntu-latest
     name: Jira Example
-    outputs:
-      job_output: ${{ steps.create.outputs.issue }}
+    # outputs:
+    #   job_output: ${{ steps.create.outputs.issue }}
+    
     steps:
+    - name: Login
+      uses: atlassian/gajira-login@v3
+      env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        
     - name: Create Jira Issue
       id: create
       uses: atlassian/gajira-create@v3
@@ -39,4 +47,6 @@ jobs:
         issuetype: ${{ inputs.type }}
         summary: ${{ inputs.summary }}
         description: ${{ inputs.description }}
-    
+
+    - name: Log created issue
+      run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
