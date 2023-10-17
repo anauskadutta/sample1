@@ -26,5 +26,12 @@ response = r.json()
 
 print(f"Total GitHub issues returned: {len(response)}")
 
+## iterating through the list of objects
 for issue in response:
-  print(issue['title'])
+  if issue['state'] != 'open':
+    issue_title = issue['title']
+    issue_url = issue['html_url']
+    print(issue_title)
+    print(issue_url)
+  else:
+    print("Issue no " + issue['number'] + ' is open")
