@@ -18,13 +18,13 @@ jobs:
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
-  # create:
-  #   needs: [build]
-  #   uses: ./.github/workflows/jira-issue.yml
-  #   with:
-  #     project: STP
-  #     summary: Test bugs
-  #     description: GitHub issue bugs
+  create:
+    needs: [build]
+    uses: ./.github/workflows/jira-issue.yml
+    with:
+      project: STP
+      summary: Test bugs
+      description: GitHub issue bugs
   
   # display:
   #   needs: [create]
