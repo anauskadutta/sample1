@@ -19,6 +19,15 @@ on:
         type: string
         description: Issue description
         required: true
+    
+    secrets:
+      JIRA_BASE_URL:
+        required: true
+      JIRA_USER_EMAIL:
+        required: true
+      JIRA_API_TOKEN:
+        required: true
+    
     # outputs:
     #   issue:
     #     description: Details of created Jira issue
