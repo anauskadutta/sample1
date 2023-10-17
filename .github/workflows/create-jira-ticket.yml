@@ -6,6 +6,8 @@ on:
 
 name: Create Jira Ticket
 
+permissions: write-all
+
 jobs:
   build:
     runs-on: ubuntu-latest
