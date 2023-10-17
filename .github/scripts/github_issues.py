@@ -34,4 +34,4 @@ for issue in response:
     print(issue_title)
     print(issue_url)
   else:
-    print("Issue no " + issue['number'] + ' is open")
+    print("Issue no " + issue['number'] + " is open")
