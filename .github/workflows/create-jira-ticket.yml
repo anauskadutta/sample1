@@ -18,17 +18,17 @@ jobs:
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
-  create:
-    needs: [build]
-    uses: ./.github/workflows/jira-issue.yml
-    with:
-      project: STP
-      summary: Test bugs
-      description: GitHub issue bugs
+  # create:
+  #   needs: [build]
+  #   uses: ./.github/workflows/jira-issue.yml
+  #   with:
+  #     project: STP
+  #     summary: Test bugs
+  #     description: GitHub issue bugs
   
-  display:
-    needs: [create]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Log created issue
-      run: echo "Issue ${{ jobs.create.outputs.issue }} was created"        
+  # display:
+  #   needs: [create]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Log created issue
+  #     run: echo "Issue ${{ jobs.create.outputs.issue }} was created"        
