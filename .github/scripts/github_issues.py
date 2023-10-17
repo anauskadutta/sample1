@@ -22,9 +22,9 @@ response = r.json()
 # # process results
 # print(response)
 
-issue_objects = response[0]
+# issue_objects = response[0]
 
-print(f"Total GitHub issues returned: {len(issue_objects)}")
+print(f"Total GitHub issues returned: {len(response)}")
 
-# for issue in response:
-#   print("Title: {issue.title}")
+for issue in response:
+  print(f"Title: {issue.title}")
