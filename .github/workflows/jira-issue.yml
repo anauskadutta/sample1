@@ -1,0 +1,42 @@
+name: Jira Issue
+
+on: 
+  workflow_call:
+    inputs:
+      project_key:
+        type: string
+        description: Jira Project Key
+        required: true
+      issue_type:
+        type: string
+        description: Type of Jira issue
+        default: Bug
+      issue_summary:
+        type: string
+        description: Issue summary
+        required: true
+      issue_description:
+        type: string
+        description: Issue description
+        required: true
+    outputs:
+      issue:
+        description: Details of created Jira issue
+        value: ${{ jobs.create_issue.outputs.job_output }}
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    name: Jira Example
+    outputs:
+      job_output: ${{ steps.create.outputs.issue }}
+    steps:
+    - name: Create Jira Issue
+      id: create
+      uses: atlassian/gajira-create@v3
+      with:
+        project: ${{ inputs.project_key }}
+        issuetype: ${{ inputs.issue_type }}
+        summary: ${{ inputs.issue_summary }}
+        description: ${{ inputs.issue_description }}
+    
