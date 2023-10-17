@@ -19,6 +19,7 @@ jobs:
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
   create:
+    needs: [build]
     uses: ./.github/workflows/jira-issue.yml
     with:
       project: STP
@@ -26,6 +27,7 @@ jobs:
       description: GitHub issue bugs
   
   display:
+    needs: [create]
     runs-on: ubuntu-latest
     steps:
     - name: Log created issue
