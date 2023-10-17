@@ -8,7 +8,7 @@ on:
       - '**/codeql/**'
       - 'README.MD'
       - '**jira**'
-      - '**.sh'
+      - '**/scripts/**'
       - '**test**'
 
 jobs:
