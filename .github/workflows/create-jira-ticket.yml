@@ -20,13 +20,11 @@ jobs:
 
     - name: Create Jira Issue
       id: create
-      uses: atlassian/gajira-create@v3
+      uses: ./.github/workflows/jira-issue.yml
       with:
         project: STP
-        issuetype: Bug
-        summary: Test bug
-        description: GitHub issue bug
-        # fields: '{"customfield_10171": "test"}'
+        summary: Test bugs
+        description: GitHub issue bugs
     
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"
