@@ -3,19 +3,19 @@ name: Jira Issue
 on: 
   workflow_call:
     inputs:
-      project_key:
+      project:
         type: string
         description: Jira Project Key
         required: true
-      issue_type:
+      type:
         type: string
         description: Type of Jira issue
         default: Bug
-      issue_summary:
+      summary:
         type: string
         description: Issue summary
         required: true
-      issue_description:
+      description:
         type: string
         description: Issue description
         required: true
@@ -35,8 +35,8 @@ jobs:
       id: create
       uses: atlassian/gajira-create@v3
       with:
-        project: ${{ inputs.project_key }}
-        issuetype: ${{ inputs.issue_type }}
-        summary: ${{ inputs.issue_summary }}
-        description: ${{ inputs.issue_description }}
+        project: ${{ inputs.project }}
+        issuetype: ${{ inputs.type }}
+        summary: ${{ inputs.summary }}
+        description: ${{ inputs.description }}
     
