@@ -20,4 +20,4 @@ print(f"Status code: {r.status_code}")
 response_dict = r.json()
 
 # process results
-print(response_dict.keys())
+print(response_dict)
