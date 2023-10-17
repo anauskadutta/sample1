@@ -28,10 +28,10 @@ print(f"Total GitHub issues returned: {len(response)}")
 
 ## iterating through the list of objects
 for issue in response:
-  if issue['state'] != 'open':
+  if issue['state'] == 'open':
     issue_title = issue['title']
     issue_url = issue['html_url']
-    print(issue_title)
-    print(issue_url)
+    print("Title: " + issue_title)
+    print("URL: " + issue_url)
   else:
-    print("Issue " + issue['html_url'] + " is open")
+    print("Issue " + issue['html_url'] + " is not open")
