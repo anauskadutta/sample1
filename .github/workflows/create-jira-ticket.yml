@@ -27,14 +27,14 @@ jobs:
     - name: Execute python script
       run: python ./.github/scripts/github_issues.py
 
-  create:
-    needs: [build]
-    uses: ./.github/workflows/jira-issue.yml
-    with:
-      project: STP
-      summary: Test bugs
-      description: GitHub issue bugs
-    secrets: 
-      JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
+  # create:
+  #   needs: [build]
+  #   uses: ./.github/workflows/jira-issue.yml
+  #   with:
+  #     project: STP
+  #     summary: Test bugs
+  #     description: GitHub issue bugs
+  #   secrets: 
+  #     JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+  #     JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+  #     JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
