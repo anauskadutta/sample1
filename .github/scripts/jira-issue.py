@@ -29,9 +29,6 @@ if r.status_code == 200:
   
   print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
 
-  # # sending output
-  # os.environ['GITHUB_OUTPUT'] = "alert_list={alert_list}"
-
   data = []
 
   ## iterating through the list of objects of CodeQL scan alerts
@@ -49,7 +46,7 @@ if r.status_code == 200:
     #   print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
   json_data = json.dumps(data)
   print(json_data)
-  os.environ['GITHUB_OUTPUT'] = "alert_list={json_data}"
+  # os.environ['GITHUB_OUTPUT'] = "alert_list={json_data}"
 else:
   print(f"Status code: {r.status_code}")
   print(r.json())
