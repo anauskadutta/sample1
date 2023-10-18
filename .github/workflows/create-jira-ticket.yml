@@ -24,8 +24,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         
+    # - name: Execute python script
+    #   run: python ./.github/scripts/github_issues.py
+    
     - name: Execute python script
-      run: python ./.github/scripts/github_issues.py
+      run: python ./.github/scripts/jira-issue.py
 
   # create:
   #   needs: [build]
