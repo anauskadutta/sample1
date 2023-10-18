@@ -45,8 +45,8 @@ jobs:
       matrix: ${{ fromJson(needs.build.outputs.matrix) }}
     with:
       project: STP
-      summary: matrix.title
-      description: matrix.body
+      summary: ${{ matrix.title }}
+      description: ${{ matrix.body }}
     secrets: 
       JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
       JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
