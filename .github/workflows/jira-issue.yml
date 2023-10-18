@@ -11,14 +11,14 @@ on:
         type: string
         description: Type of Jira issue
         default: Bug
-      summary:
-        type: string
-        description: Issue summary
-        required: true
-      description:
-        type: string
-        description: Issue description
-        required: true
+      # summary:
+      #   type: string
+      #   description: Issue summary
+      #   required: true
+      # description:
+      #   type: string
+      #   description: Issue description
+      #   required: true
     
     secrets:
       JIRA_BASE_URL:
@@ -47,8 +47,10 @@ jobs:
       with:
         project: ${{ inputs.project }}
         issuetype: ${{ inputs.type }}
-        summary: ${{ inputs.summary }}
-        description: ${{ inputs.description }}
+        # summary: ${{ inputs.summary }}
+        # description: ${{ inputs.description }}
+        summary: ${{ matrix.title }}
+        description: ${{ matrix.body }}
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
