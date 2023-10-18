@@ -1,0 +1,37 @@
+# import requests module
+import requests
+
+# import json module
+import json
+
+# store API url
+url = 'https://api.github.com/repos/anauskadutta/sample1/issues'
+
+# assign the headers- not always necessary, but something we have to do with the GitHub API
+headers = {'Accept': 'application/vnd.github.v3+json'}
+
+# assign the requests method
+r = requests.get(url, headers=headers)
+
+# print a status update for the requests command
+print(f"Status code: {r.status_code}")
+
+# store API response to variable
+response = r.json()
+
+# # process results
+# print(response)
+
+# issue_objects = response[0]
+
+print(f"Total GitHub issues returned: {len(response)}")
+
+## iterating through the list of objects
+for issue in response:
+  if issue['state'] == 'open':
+    issue_title = issue['title']
+    issue_url = issue['html_url']
+    print("Title: " + issue_title)
+    print("URL: " + issue_url)
+  else:
+    print("Issue " + issue['html_url'] + " is not open")
