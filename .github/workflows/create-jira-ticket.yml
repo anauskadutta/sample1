@@ -10,9 +10,7 @@ name: Create Jira Ticket
 env:
   GH_TOKEN: ${{ github.token }}
 
-permissions:
-  security-events: read
-  actions: read
+permissions: read-all
 
 jobs:
   build:
