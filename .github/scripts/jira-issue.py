@@ -30,7 +30,7 @@ if r.status_code == 200:
   print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
 
   # sending output
-  "alert_list={alert_list}" >> $GITHUB_OUTPUT
+  os.environ['GITHUB_OUTPUT'] = "alert_list={alert_list}"
 
   ## iterating through the list of objects of CodeQL scan alerts
   for alert in alert_list:
