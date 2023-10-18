@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.get-alert-json.outputs.alert_list }}
+      matrix: ${{ steps.get-alert-json.outputs.json_data }}
     steps:
     - name: checkout repo content
       uses: actions/checkout@v3 # checkout the repository content
@@ -37,7 +37,7 @@ jobs:
       run: python ./.github/scripts/jira-issue.py
 
     - name: Print output
-      run: echo $GITHUB_OUTPUT
+      run: echo ${{ steps.get-alert-json.outputs.json_data }}
 
   # create:
   #   needs: [build]
