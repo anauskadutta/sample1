@@ -36,7 +36,7 @@ jobs:
       id: get-alert-json
       run: |
         test_json=$(python ./.github/scripts/jira-issue.py)
-        echo "DATA=${test_json}" >> $GITHUB_OUTPUT
+        echo "DATA = $test_json" >> $GITHUB_OUTPUT
 
     - name: Print output
       run: echo ${{ steps.get-alert-json.outputs.test_json }}
