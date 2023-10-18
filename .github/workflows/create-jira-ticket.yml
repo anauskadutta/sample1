@@ -36,23 +36,18 @@ jobs:
       id: get-alert-json
       run: |
         output=$(python ./.github/scripts/jira-issue.py)
-        echo "value_from_python=${output}" >> $GITHUB_OUTPUT
+        echo "json_data=${output}" >> $GITHUB_OUTPUT
 
-    - name: Print output
-      run: |
-        extracted_value="${{ steps.get-alert-json.outputs.value_from_python }}"
-        echo "Extracted value: $extracted_value"
-
-  # create:
-  #   needs: [build]
-  #   uses: ./.github/workflows/jira-issue.yml
-  #   strategy:
-  #     matrix: ${{ fromJson(needs.build.outputs.matrix) }}
-  #   with:
-  #     project: STP
-  #     summary: matrix.title
-  #     description: matrix.body
-  #   secrets: 
-  #     JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-  #     JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-  #     JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
+  create:
+    needs: [build]
+    uses: ./.github/workflows/jira-issue.yml
+    strategy:
+      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+    with:
+      project: STP
+      summary: matrix.title
+      description: matrix.body
+    secrets: 
+      JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
