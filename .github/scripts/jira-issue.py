@@ -8,7 +8,6 @@ import requests
 import json
 
 token = os.environ['GH_TOKEN']
-# env_file = os.environ['GITHUB_ENV']
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
@@ -21,36 +20,29 @@ headers = {'Accept': 'application/vnd.github+json',
 # assign the requests method
 r = requests.get(url, headers=headers)
 
-if r.status_code == 200:
-  # store API response to variable
-  alert_list = r.json()
-  
-  # # process results
-  # print(alert_list)
-  
-  # print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
+print(get_json(r))
 
-  data = []
-
-  ## iterating through the list of objects of CodeQL scan alerts
-  for alert in alert_list:
-    alert_dict = {}
-    if alert['state'] == 'open':
-      alert_title = alert['most_recent_instance']['message']['text']
-      alert_body = alert['html_url']
-      # print("Title: " + alert_title)
-      # print("Body: " + alert_body)
-      alert_dict['title'] = alert_title
-      alert_dict['body'] = alert_body
-      data.append(alert_dict)
-    # else:
-    #   print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
-  json_data = json.dumps(data)
-  print(json_data)
-
-  with open("sample.json", "w") as myfile:
-    myfile.write(json_data)
-  # os.environ['GITHUB_ENV'] = "sample.json"  
-# else:
-#   print(f"Status code: {r.status_code}")
-#   print(r.json())
+def get_json(r):
+          if r.status_code == 200:
+            # store API response to variable
+            alert_list = r.json()
+          
+            data = []
+          
+            ## iterating through the list of objects of CodeQL scan alerts
+            for alert in alert_list:
+              alert_dict = {}
+              if alert['state'] == 'open':
+                alert_dict['title'] = alert['most_recent_instance']['message']['text']
+                alert_dict['body'] = alert['html_url']
+                data.append(alert_dict)
+              else:
+                continue
+            # json_data = json.dumps(data)
+            # with open("sample.json", "w") as myfile:
+            #   myfile.write(json_data)
+          else:
+            print(f"Status code: {r.status_code}")
+            print(r.json())
+                    
+          return json_data
