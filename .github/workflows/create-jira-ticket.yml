@@ -41,8 +41,8 @@ jobs:
   create:
     needs: [build]
     uses: ./.github/workflows/jira-issue.yml
-    # strategy:
-    #   matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+    strategy:
+      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
     with:
       project: STP
       matrix_value: ${{ fromJson(needs.build.outputs.matrix) }} 
