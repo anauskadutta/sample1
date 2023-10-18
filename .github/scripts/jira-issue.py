@@ -28,6 +28,7 @@ if r.status_code == 200:
   # print(alert_list)
   
   print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
+  print(f'::set-output name=alert_list::{alert_list}')
   
   ## iterating through the list of objects of CodeQL scan alerts
   for alert in alert_list:
