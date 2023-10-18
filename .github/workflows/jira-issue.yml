@@ -19,6 +19,10 @@ on:
       #   type: string
       #   description: Issue description
       #   required: true
+      matrix_value:
+        type: string
+        description: Issue matrix
+        required: true
     
     secrets:
       JIRA_BASE_URL:
@@ -51,8 +55,8 @@ jobs:
         issuetype: ${{ inputs.type }}
         # summary: ${{ inputs.summary }}
         # description: ${{ inputs.description }}
-        summary: ${{ matrix.title }}
-        description: ${{ matrix.body }}
+        summary: ${{ inputs.matrix_value.title }}
+        description: ${{ inputs.matrix_value.body }}
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
