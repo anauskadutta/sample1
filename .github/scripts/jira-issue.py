@@ -44,7 +44,7 @@ if r.status_code == 200:
       print("Body: " + alert_body)
       alert_dict['title'] = alert_title
       alert_dict['body'] = alert_body
-      data.append(alert_dict)
+      data.update(alert_dict)
     else:
       print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
   json_data = json.dumps(alert_dict)
