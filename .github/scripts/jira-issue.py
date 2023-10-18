@@ -1,20 +1,24 @@
+# import os module
+import os
+
 # import requests module
 import requests
 
 # import json module
 import json
 
+token = os.environ['GH_TOKEN']
+
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
 
 # assign the headers- not always necessary, but something we have to do with the GitHub API
-headers = {'Accept': 'application/vnd.github+json'}
+headers = {'Accept': 'application/vnd.github+json',
+          'Authorization': 'Bearer {token}',
+          'X-GitHub-Api-Version': '2022-11-28'}
 
 # assign the requests method
 r = requests.get(url, headers=headers)
-
-# print a status update for the requests command
-print(f"Status code: {r.status_code}")
 
 if r.status_code == 200:
   # store API response to variable
