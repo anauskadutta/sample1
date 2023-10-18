@@ -12,7 +12,6 @@ token = os.environ['GH_TOKEN']
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
-print(url)
 
 # assign the headers- not always necessary, but something we have to do with the GitHub API
 headers = {'Accept': 'application/vnd.github+json',
@@ -29,7 +28,7 @@ if r.status_code == 200:
   # # process results
   # print(alert_list)
   
-  print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
+  # print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
 
   data = []
 
@@ -51,7 +50,7 @@ if r.status_code == 200:
 
   with open("sample.json", "w") as myfile:
     myfile.write(json_data)
-  os.environ['GITHUB_ENV'] = "sample.json"  
-else:
-  print(f"Status code: {r.status_code}")
-  print(r.json())
+  # os.environ['GITHUB_ENV'] = "sample.json"  
+# else:
+#   print(f"Status code: {r.status_code}")
+#   print(r.json())
