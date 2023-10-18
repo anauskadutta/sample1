@@ -43,6 +43,7 @@ jobs:
     uses: ./.github/workflows/jira-issue.yml
     strategy:
       matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+      fail-fast: true
     with:
       project: STP
       # summary: ${{ matrix.title }}
