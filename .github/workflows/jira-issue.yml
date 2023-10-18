@@ -11,14 +11,14 @@ on:
         type: string
         description: Type of Jira issue
         default: Bug
-      summary:
-        type: string
-        description: Issue summary
-        required: true
-      description:
-        type: string
-        description: Issue description
-        required: true
+      # summary:
+      #   type: string
+      #   description: Issue summary
+      #   required: true
+      # description:
+      #   type: string
+      #   description: Issue description
+      #   required: true
     
     secrets:
       JIRA_BASE_URL:
@@ -27,18 +27,13 @@ on:
         required: true
       JIRA_API_TOKEN:
         required: true
-    
-    # outputs:
-    #   issue:
-    #     description: Details of created Jira issue
-    #     value: ${{ jobs.create_issue.outputs.job_output }}
 
 jobs:
   create_issue:
+    strategy:
+      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
     runs-on: ubuntu-latest
     name: Jira Example
-    # outputs:
-    #   job_output: ${{ steps.create.outputs.issue }}
     
     steps:
     - name: Login
@@ -54,8 +49,10 @@ jobs:
       with:
         project: ${{ inputs.project }}
         issuetype: ${{ inputs.type }}
-        summary: ${{ inputs.summary }}
-        description: ${{ inputs.description }}
+        # summary: ${{ inputs.summary }}
+        # description: ${{ inputs.description }}
+        summary: ${{ matrix.title }}
+        description: ${{ matrix.body }}
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
