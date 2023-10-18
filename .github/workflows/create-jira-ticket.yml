@@ -45,7 +45,6 @@ jobs:
       matrix: ${{ fromJson(needs.build.outputs.matrix) }}
     with:
       project: STP
-      matrix_value: ${{ fromJson(needs.build.outputs.matrix) }} 
       # summary: ${{ matrix.title }}
       # description: ${{ matrix.body }}
     secrets: 
