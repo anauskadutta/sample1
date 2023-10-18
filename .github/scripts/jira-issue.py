@@ -12,6 +12,7 @@ token = os.environ['GH_TOKEN']
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
+print(url)
 
 # assign the headers- not always necessary, but something we have to do with the GitHub API
 headers = {'Accept': 'application/vnd.github+json',
