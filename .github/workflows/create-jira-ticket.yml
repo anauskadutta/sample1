@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - '**/create-jira-ticket.yml'
-      - '**/github_issues.py'
+      - '**.py'
 
 name: Create Jira Ticket
 
