@@ -16,21 +16,25 @@ r = requests.get(url, headers=headers)
 # print a status update for the requests command
 print(f"Status code: {r.status_code}")
 
-# store API response to variable
-alert_list = r.json()
-
-# process results
-print(alert_list)
-
-print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
-
-# ## iterating through the list of objects of CodeQL scan alerts
-# for alert in alert_list:
-#   if alert['state'] == 'open':
-#     alert_title = alert['most_recent_instance']['message']['text']
-#     alert_body = alert['html_url']
-#     print("Title: " + alert_title)
-#     print("Body: " + alert_body)
-#     # print("Creating Jira issue...")
-#   else:
-#     print("CodeQL scan alert " + alert['html_url'] + " is resolved")
+if r.status_code == 200:
+  # store API response to variable
+  alert_list = r.json()
+  
+  # process results
+  print(alert_list)
+  
+  print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
+  
+  # ## iterating through the list of objects of CodeQL scan alerts
+  # for alert in alert_list:
+  #   if alert['state'] == 'open':
+  #     alert_title = alert['most_recent_instance']['message']['text']
+  #     alert_body = alert['html_url']
+  #     print("Title: " + alert_title)
+  #     print("Body: " + alert_body)
+  #     # print("Creating Jira issue...")
+  #   else:
+  #     print("CodeQL scan alert " + alert['html_url'] + " is resolved")
+else:
+  print(f"Status code: {r.status_code}")
+  print(r.json())
