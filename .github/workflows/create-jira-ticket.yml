@@ -7,6 +7,10 @@ on:
 
 name: Create Jira Ticket
 
+permissions:
+  security-events: read
+  actions: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
