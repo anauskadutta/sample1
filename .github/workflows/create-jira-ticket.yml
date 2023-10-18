@@ -37,7 +37,7 @@ jobs:
       run: python ./.github/scripts/jira-issue.py
 
     - name: Print output
-      run: echo ${{ steps.get-alert-json.outputs.json_data }}
+      run: echo ${{ steps.get-alert-json.outputs.url }}
 
   # create:
   #   needs: [build]
