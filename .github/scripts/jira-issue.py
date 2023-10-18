@@ -32,7 +32,7 @@ if r.status_code == 200:
   # # sending output
   # os.environ['GITHUB_OUTPUT'] = "alert_list={alert_list}"
 
-  data = {}
+  data = []
 
   ## iterating through the list of objects of CodeQL scan alerts
   for alert in alert_list:
@@ -44,7 +44,7 @@ if r.status_code == 200:
       # print("Body: " + alert_body)
       alert_dict['title'] = alert_title
       alert_dict['body'] = alert_body
-      data.update(alert_dict)
+      data.append(alert_dict)
     # else:
     #   print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
   json_data = json.dumps(data)
