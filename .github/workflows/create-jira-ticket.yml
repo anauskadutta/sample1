@@ -39,16 +39,16 @@ jobs:
       id: get-alert-json
       run: python ./.github/scripts/jira-issue.py
 
-  # create:
-  #   needs: [build]
-  #   uses: ./.github/workflows/jira-issue.yml
-  #   strategy:
-  #     matrix: ${{ fromJson(needs.build.outputs.matrix) }}
-  #   with:
-  #     project: STP
-  #     summary: matrix.title
-  #     description: matrix.body
-  #   secrets: 
-  #     JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-  #     JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-  #     JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
+  create:
+    needs: [build]
+    uses: ./.github/workflows/jira-issue.yml
+    strategy:
+      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+    with:
+      project: STP
+      summary: matrix.title
+      description: matrix.body
+    secrets: 
+      JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}     
