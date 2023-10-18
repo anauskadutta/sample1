@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     strategy:
-      matrix:  ${{ fromJson(needs.build.outputs.matrix }}
+      matrix:  ${{ fromJson(needs.build.outputs.matrix) }}
     steps:
       - name: Print matrix value
         run: echo ${{ matrix['reqd_alert_details'].body }}
