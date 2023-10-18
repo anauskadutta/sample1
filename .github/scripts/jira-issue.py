@@ -21,27 +21,28 @@ headers = {'Accept': 'application/vnd.github+json',
 r = requests.get(url, headers=headers)
 
 def get_json(r):
-          if r.status_code == 200:
-            # store API response to variable
-            alert_list = r.json()
-          
-            data = []
-          
-            ## iterating through the list of objects of CodeQL scan alerts
-            for alert in alert_list:
-              alert_dict = {}
-              if alert['state'] == 'open':
-                alert_dict['title'] = alert['most_recent_instance']['message']['text']
-                alert_dict['body'] = alert['html_url']
-                data.append(alert_dict)
-              else:
-                continue
-            json_data = json.dumps(data)
-            # with open("sample.json", "w") as myfile:
-            #   myfile.write(json_data)
+          if r.status_code == 200:             
+                    # store API response to variable
+                    alert_list = r.json()
+                    json_obj = {}
+                    json_obj['reqd_alert_details'] = []
+                    
+                    ## iterating through the list of objects of CodeQL scan alerts
+                    for alert in alert_list:
+                              alert_dict = {}
+                              if alert['state'] == 'open':
+                                        alert_dict['title'] = alert['most_recent_instance']['message']['text']
+                                        alert_dict['body'] = alert['html_url']
+                                        json_obj['reqd_alert_details'].append(alert_dict)
+                              else:
+                                        continue
+
+                    json_data = json.dumps(json_obj)
+                    # with open("sample.json", "w") as myfile:
+                    #   myfile.write(json_data)
           else:
-            print(f"Status code: {r.status_code}")
-            print(r.json())
+                    print(f"Status code: {r.status_code}")
+                    print(r.json())
                     
           return json_data
 
