@@ -34,10 +34,14 @@ jobs:
     
     - name: Execute python script
       id: get-alert-json
-      run: python ./.github/scripts/jira-issue.py
+      run: |
+        output=$(python ./.github/scripts/jira-issue.py)
+        echo "::set-output name=value_from_python::${output}"
 
     - name: Print output
-      run: echo ${{ steps.get-alert-json.outputs.json_data }}
+      run: |
+        extracted_value="${{ steps.get-alert-json.outputs.value_from_python }}"
+        echo "Extracted value: $extracted_value"
 
   # create:
   #   needs: [build]
