@@ -36,8 +36,8 @@ if r.status_code == 200:
 
   ## iterating through the list of objects of CodeQL scan alerts
   for alert in alert_list:
+    alert_dict = {}
     if alert['state'] == 'open':
-      alert_dict = {}
       alert_title = alert['most_recent_instance']['message']['text']
       alert_body = alert['html_url']
       # print("Title: " + alert_title)
