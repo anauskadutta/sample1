@@ -8,6 +8,7 @@ import requests
 import json
 
 token = os.environ['GH_TOKEN']
+env_file = os.environ['GITHUB_ENV']
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
@@ -47,6 +48,8 @@ if r.status_code == 200:
   json_data = json.dumps(data)
   print(json_data)
   # os.environ['GITHUB_OUTPUT'] = "alert_list={json_data}"
+  with open(env_file, "a") as myfile:
+  myfile.write("alert_list={json_data}")
 else:
   print(f"Status code: {r.status_code}")
   print(r.json())
