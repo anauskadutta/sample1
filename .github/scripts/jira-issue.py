@@ -20,8 +20,6 @@ headers = {'Accept': 'application/vnd.github+json',
 # assign the requests method
 r = requests.get(url, headers=headers)
 
-print(get_json(r))
-
 def get_json(r):
           if r.status_code == 200:
             # store API response to variable
@@ -46,3 +44,5 @@ def get_json(r):
             print(r.json())
                     
           return json_data
+
+print(get_json(r))
