@@ -33,4 +33,4 @@ for alert in alert_list:
     print("Body: " + alert_body)
     # print("Creating Jira issue...")
   else:
-    print("CodeQL scan alert " + alert_body + " is resolved")
+    print("CodeQL scan alert " + alert['html_url'] + " is resolved")
