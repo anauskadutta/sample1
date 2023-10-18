@@ -36,7 +36,7 @@ jobs:
       id: get-alert-json
       run: |
         output=$(python ./.github/scripts/jira-issue.py)
-        echo "::set-output name=value_from_python::${output}"
+        echo "value_from_python=${output}" >> $GITHUB_OUTPUT
 
     - name: Print output
       run: |
