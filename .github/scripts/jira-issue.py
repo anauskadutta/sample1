@@ -5,10 +5,10 @@ import requests
 import json
 
 # store API url
-url = 'https://api.github.com/repos/anauskadutta/sample1/issues'
+url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
 
 # assign the headers- not always necessary, but something we have to do with the GitHub API
-headers = {'Accept': 'application/vnd.github.v3+json'}
+headers = {'Accept': 'application/vnd.github+json'}
 
 # assign the requests method
 r = requests.get(url, headers=headers)
@@ -17,21 +17,20 @@ r = requests.get(url, headers=headers)
 print(f"Status code: {r.status_code}")
 
 # store API response to variable
-response = r.json()
+alert_list = r.json()
 
 # # process results
-# print(response)
+# print(alert_list)
 
-# issue_objects = response[0]
+print(f"Total CodeQL scan alerts returned: {len(alert_list)}")
 
-print(f"Total GitHub issues returned: {len(response)}")
-
-## iterating through the list of objects
-for issue in response:
-  if issue['state'] == 'open':
-    issue_title = issue['title']
-    issue_url = issue['html_url']
-    print("Title: " + issue_title)
-    print("URL: " + issue_url)
+## iterating through the list of objects of CodeQL scan alerts
+for alert in alert_list:
+  if alert['state'] == 'open':
+    alert_title = alert['most_recent_instance']['message']['text']
+    alert_body = alert['html_url']
+    print("Title: " + alert_title)
+    print("Body: " + alert_body)
+    # print("Creating Jira issue...")
   else:
-    print("Issue " + issue['html_url'] + " is not open")
+    print("CodeQL scan alert " + alert_body + " is resolved")
