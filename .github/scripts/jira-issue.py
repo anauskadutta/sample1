@@ -40,14 +40,14 @@ if r.status_code == 200:
       alert_dict = {}
       alert_title = alert['most_recent_instance']['message']['text']
       alert_body = alert['html_url']
-      print("Title: " + alert_title)
-      print("Body: " + alert_body)
+      # print("Title: " + alert_title)
+      # print("Body: " + alert_body)
       alert_dict['title'] = alert_title
       alert_dict['body'] = alert_body
       data.update(alert_dict)
-    else:
-      print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
-  json_data = json.dumps(alert_dict)
+    # else:
+    #   print("CodeQL scan alert " + alert['html_url'] + " is " + alert['state'])
+  json_data = json.dumps(data)
   print(json_data)
   os.environ['GITHUB_OUTPUT'] = "alert_list={json_data}"
 else:
