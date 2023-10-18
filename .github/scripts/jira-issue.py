@@ -36,7 +36,7 @@ def get_json(r):
                 data.append(alert_dict)
               else:
                 continue
-            # json_data = json.dumps(data)
+            json_data = json.dumps(data)
             # with open("sample.json", "w") as myfile:
             #   myfile.write(json_data)
           else:
