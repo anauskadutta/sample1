@@ -37,8 +37,8 @@ jobs:
         output=$(python ./.github/scripts/github-issues.py)
         echo "json_data=${output}" >> $GITHUB_OUTPUT
 
-    - name: Print
-      run: ${{ steps.get-issue-json.outputs.json_data }}
+    # - name: Print
+    #   run: ${{ steps.get-issue-json.outputs.json_data }}
 
   create:
     needs: build
