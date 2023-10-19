@@ -38,8 +38,7 @@ def get_json(r):
                                         continue
 
                     json_data = json.dumps(json_obj)
-                    # with open("sample.json", "w") as myfile:
-                    #   myfile.write(json_data)
+  
           else:
                     print(f"Status code: {r.status_code}")
                     print(r.json())
