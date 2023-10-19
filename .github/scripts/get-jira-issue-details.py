@@ -26,5 +26,6 @@ issue_json = issue_details_response.json()
 issue_list = issue_json['issues']
 
 for issue in issue_list:
-  issue_description = issue.fields.description['content']['content'].text
-  print(issue_description)
+  print("Issue object:" + issue)
+  # issue_description = issue.fields.description['content']['content'].text
+  # print(issue_description)
