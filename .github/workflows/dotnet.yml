@@ -10,6 +10,8 @@ on:
       - '**jira**'
       - '**/scripts/**'
       - '**test**'
+      - '**github-issue**'
+      - '**codeql**'
 
 jobs:
   build:
