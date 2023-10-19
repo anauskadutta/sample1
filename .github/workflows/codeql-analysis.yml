@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: "CodeQL Analysis"
 
 on:
   workflow_dispatch:
@@ -44,7 +44,7 @@ jobs:
         category: "/language:${{matrix.language}}"
 
   map_vulnerabilities_with_jira:
-    name: Map CodeQL with Jira
+    name: Create Jira Ticket
     needs: analyze
     uses: ./.github/workflows/get-codeql-vulnerability-details.yml
     secrets: inherit
