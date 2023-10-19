@@ -43,6 +43,6 @@ jobs:
       fail-fast: true
     with:
       project: STP
-      summary: ${{ matrix['reqd_alert_details'].title }}
-      description: ${{ matrix['reqd_alert_details'].body }}
+      summary: ${{ matrix['include'].title }}
+      description: ${{ matrix['include'].body }}
     secrets: inherit
