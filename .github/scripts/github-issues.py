@@ -19,14 +19,14 @@ def get_github_issue_json(r):
   if r.status_code == 200:
     issue_list = r.json()
     json_obj = {}
-    json_obj['reqd_issue_details'] = []
+    json_obj['include'] = []
 
     for issue in issue_list:
       issue_obj = {}
       if issue['state'] == 'open':
         issue_obj['title'] = issue['title']
-        issue_obj['url'] = issue['html_url']
-        json_obj['reqd_issue_details'].append(issue_obj)
+        issue_obj['body'] = issue['html_url']
+        json_obj['include'].append(issue_obj)
       else:
         continue
     
