@@ -23,5 +23,8 @@ auth = (username, token)
 
 issue_details_response = requests.get(url, params=params, headers=headers, auth=auth)
 
-print(issue_details_response.status_code)
-print(issue_details_response.json())
+issue_list = issue_details_response['issues']
+
+for issue in issue_list:
+  issue_description = issue.fields.description['content']['content'].text
+  print(issue_description)
