@@ -7,11 +7,11 @@ on:
         - 'main'
     paths:
       - '**/codeql/**'
-      - '**/codeql.yml'
+      - '**/codeql-analysis.yml'
 
 jobs:
   analyze:
-    name: Analyze
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -44,9 +44,10 @@ jobs:
         category: "/language:${{matrix.language}}"
 
   map_vulnerabilities_with_jira:
-    name: Create Jira Bug
+    name: Map CodeQL with Jira
     needs: analyze
-    uses: ./.github/workflows/create-jira-ticket.yml
+    uses: ./.github/workflows/get-codeql-vulnerability-details.yml
+    secrets: inherit
     permissions:
       security-events: read
 
