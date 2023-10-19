@@ -62,13 +62,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-            npm install -g gajira
+            npm install -g jira
             npm install -g jq
   
       - name: Check if Jira ticket exists
         id: check-ticket
         run: |
-            gajira view --help
+            jira view --help
             # ticket=$(gajira view -s "${{ secrets.JIRA_BASE_URL }}" -u "${{ secrets.JIRA_USER_EMAIL }}" -p "${{ secrets.JIRA_API_TOKEN }}" -k "${{ inputs.project }}" -t Bug -f "summary~'My new Jira ticket'" | jq -r '.[0].key')
             # if [ -z "$ticket" ]; then
             #     echo "::set-output name=ticket_exists::false"
