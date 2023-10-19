@@ -36,6 +36,8 @@ def get_github_issue_json(r):
     print(f"Status code: {r.status_code}")
     print(r.json())
 
+  print("Final result: ")
+  print(json_data)
   return json_data
 
 print(get_github_issue_json(r))
