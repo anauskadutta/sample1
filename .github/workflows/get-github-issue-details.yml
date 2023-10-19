@@ -9,8 +9,8 @@ name: Get GitHub issue details
 # env:
 #   GH_TOKEN: ${{ github.token }}
 
-# permissions:
-#   security-events: read
+permissions:
+  issues: read
 
 jobs:
   build:
