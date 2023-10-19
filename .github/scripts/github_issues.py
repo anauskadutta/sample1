@@ -13,25 +13,26 @@ headers = {'Accept': 'application/vnd.github.v3+json'}
 # assign the requests method
 r = requests.get(url, headers=headers)
 
-# print a status update for the requests command
-print(f"Status code: {r.status_code}")
+def get_github_issue_json(r):
+  if r.status_code == 200:
+    issue_list = r.json()
+    json_obj = {}
+    json_obj['reqd_issue_details'] = []
 
-# store API response to variable
-response = r.json()
-
-# # process results
-# print(response)
-
-# issue_objects = response[0]
-
-print(f"Total GitHub issues returned: {len(response)}")
-
-## iterating through the list of objects
-for issue in response:
-  if issue['state'] == 'open':
-    issue_title = issue['title']
-    issue_url = issue['html_url']
-    print("Title: " + issue_title)
-    print("URL: " + issue_url)
+    for issue in issue_list:
+      issue_obj = {}
+      if issue['state'] == 'open':
+        issue_obj['title'] = issue['title']
+        issue_obj['url'] = issue['html_url']
+        json_obj['reqd_issue_details'].append(issue_obj)
+      else:
+        continue
+    
+    reqd_json_data = json.dumps(json_obj)
   else:
-    print("Issue " + issue['html_url'] + " is not open")
+    print(f"Status code: {r.status_code}")
+    print(r.json())
+
+  return reqd_json_data
+
+print(get_github_issue_json(r))
