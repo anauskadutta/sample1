@@ -68,7 +68,7 @@ jobs:
       - name: Check if Jira ticket exists
         id: check-ticket
         run: |
-            jira issue --help
+            jira issue -s "${{ secrets.JIRA_BASE_URL }}" -u "${{ secrets.JIRA_USER_EMAIL }}" -p "${{ secrets.JIRA_API_TOKEN }}" -k "${{ inputs.project }}"
             # ticket=$(gajira view -s "${{ secrets.JIRA_BASE_URL }}" -u "${{ secrets.JIRA_USER_EMAIL }}" -p "${{ secrets.JIRA_API_TOKEN }}" -k "${{ inputs.project }}" -t Bug -f "summary~'My new Jira ticket'" | jq -r '.[0].key')
             # if [ -z "$ticket" ]; then
             #     echo "::set-output name=ticket_exists::false"
