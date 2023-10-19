@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.get-github-issue-json.outputs.json_data }}
+      matrix: ${{ steps.get-issue-json.outputs.json_data }}
     steps:
     - name: checkout repo content
       uses: actions/checkout@v3 # checkout the repository content
@@ -30,19 +30,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install requests
-
-    - name: Execute python script (Testing)
-      id: get-github-issue-json
-      run: python ./.github/scripts/github-issues.py
     
-    # - name: Execute python script
-    #   id: get-github-issue-json
-    #   run: |
-    #     output=$(python ./.github/scripts/github-issues.py)
-    #     echo "json_data=${output}" >> $GITHUB_OUTPUT
+    - name: Execute python script
+      id: get-issue-json
+      run: |
+        output=$(python ./.github/scripts/github-issues.py)
+        echo "json_data=${output}" >> $GITHUB_OUTPUT
 
     - name: Print
-      run: echo ${{ steps.get-github-issue-json.outputs.json_data }}
+      run: echo ${{ steps.get-issue-json.outputs.json_data }}
 
   # create:
   #   needs: build
