@@ -56,5 +56,4 @@ jobs:
     steps:
       - name: Testing
         run: |
-          echo "${{ matrix['include'].title }}"
-          echo "${{ matrix['include'].body }}"
+          echo ${{ matrix }}
