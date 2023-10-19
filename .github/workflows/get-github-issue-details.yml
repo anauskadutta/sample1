@@ -37,12 +37,12 @@ jobs:
         output=$(python ./.github/scripts/github-issues.py)
         echo "json_data=${output}" >> $GITHUB_OUTPUT
 
-    # - name: Print
-    #   run: echo ${{ steps.get-issue-json.outputs.json_data }}
+    - name: Print
+      run: ${{ steps.get-issue-json.outputs.json_data }}
 
-  create:
+  # create:
     # needs: build
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
     # strategy:
     #   matrix: ${{ fromJson(needs.build.outputs.matrix) }}
     #   fail-fast: true
@@ -56,30 +56,6 @@ jobs:
     #   description: ${{ matrix['include'].body }}
     # secrets: inherit
     
-    steps:
+    # steps:
     #   - name: Testing
     #     run: echo ${{ matrix['include'].title }}
-
-      - name: Install dependencies
-        run: |
-            npm install -g jira-cl
-            npm install -g jq
-
-      - name: Login
-        uses: atlassian/gajira-login@v3
-        env:
-          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-      
-      - name: Check if Jira ticket exists
-        id: check-ticket
-        run: |
-            jira issue --help
-            # ticket=$(gajira view -s "${{ secrets.JIRA_BASE_URL }}" -u "${{ secrets.JIRA_USER_EMAIL }}" -p "${{ secrets.JIRA_API_TOKEN }}" -k "${{ inputs.project }}" -t Bug -f "summary~'My new Jira ticket'" | jq -r '.[0].key')
-            # if [ -z "$ticket" ]; then
-            #     echo "::set-output name=ticket_exists::false"
-            # else
-            #     echo "::set-output name=ticket_exists::true"
-            #     echo "::set-output name=ticket_key::$ticket"
-            # fi
