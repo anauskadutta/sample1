@@ -1,9 +1,10 @@
 on:
+  workflow_call:
   workflow_dispatch:
-  push:
-    paths:
-      - '**/create-jira-ticket.yml'
-      - '**.py'
+  # push:
+  #   paths:
+  #     - '**/create-jira-ticket.yml'
+  #     - '**.py'
 
 name: Create Jira Ticket
 
@@ -38,17 +39,8 @@ jobs:
         output=$(python ./.github/scripts/jira-issue.py)
         echo "json_data=${output}" >> $GITHUB_OUTPUT
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   strategy:
-  #     matrix:  ${{ fromJson(needs.build.outputs.matrix) }}
-  #   steps:
-  #     - name: Print matrix value
-  #       run: echo ${{ matrix['reqd_alert_details'].body }}
-
   create:
-    needs: [build]
+    needs: build
     uses: ./.github/workflows/jira-issue.yml
     strategy:
       matrix: ${{ fromJson(needs.build.outputs.matrix) }}
