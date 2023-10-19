@@ -30,21 +30,24 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install requests
-    
-    - name: Execute python script
-      id: get-issue-json
-      run: |
-        output=$(python ./.github/scripts/github-issues.py)
-        echo "json_data=${output}" >> $GITHUB_OUTPUT
 
-  create:
-    needs: build
-    uses: ./.github/workflows/create-jira-issue.yml
-    strategy:
-      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
-      fail-fast: true
-    with:
-      project: STP
-      summary: ${{ matrix['include'].title }}
-      description: ${{ matrix['include'].body }}
-    secrets: inherit
+    - name: Testing python jira call
+      run: python ./.github/scripts/get-jira-issue-details.py
+    
+  #   - name: Execute python script
+  #     id: get-issue-json
+  #     run: |
+  #       output=$(python ./.github/scripts/github-issues.py)
+  #       echo "json_data=${output}" >> $GITHUB_OUTPUT
+
+  # create:
+  #   needs: build
+  #   uses: ./.github/workflows/create-jira-issue.yml
+  #   strategy:
+  #     matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+  #     fail-fast: true
+  #   with:
+  #     project: STP
+  #     summary: ${{ matrix['include'].title }}
+  #     description: ${{ matrix['include'].body }}
+  #   secrets: inherit
