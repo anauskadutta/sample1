@@ -1,3 +1,5 @@
+## This script gets details of GitHub Issues and returns the required json as output
+
 # import requests module
 import requests
 
