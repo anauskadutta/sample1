@@ -30,11 +30,11 @@ def get_github_issue_json(r):
       else:
         continue
     
-    reqd_json_data = json.dumps(json_obj)
+    json_data = json.dumps(json_obj)
   else:
     print(f"Status code: {r.status_code}")
     print(r.json())
 
-  return reqd_json_data
+  return json_data
 
 print(get_github_issue_json(r))
