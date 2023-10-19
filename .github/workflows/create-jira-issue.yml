@@ -20,13 +20,13 @@ on:
         description: Issue description
         required: true
     
-    secrets:
-      JIRA_BASE_URL:
-        required: true
-      JIRA_USER_EMAIL:
-        required: true
-      JIRA_API_TOKEN:
-        required: true
+    # secrets:
+    #   JIRA_BASE_URL:
+    #     required: true
+    #   JIRA_USER_EMAIL:
+    #     required: true
+    #   JIRA_API_TOKEN:
+    #     required: true
 
 jobs:
   create_issue:
