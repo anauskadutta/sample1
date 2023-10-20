@@ -1,24 +1,25 @@
 name: Jira Issue
 
 on: 
-  workflow_call:
-    inputs:
-      project:
-        type: string
-        description: Jira Project Key
-        required: true
-      type:
-        type: string
-        description: Type of Jira issue
-        default: Bug
-      summary:
-        type: string
-        description: Issue summary
-        required: true
-      description:
-        type: string
-        description: Issue description
-        required: true
+  workflow_dispatch:
+  # workflow_call:
+  #   inputs:
+  #     project:
+  #       type: string
+  #       description: Jira Project Key
+  #       required: true
+  #     type:
+  #       type: string
+  #       description: Type of Jira issue
+  #       default: Bug
+  #     summary:
+  #       type: string
+  #       description: Issue summary
+  #       required: true
+  #     description:
+  #       type: string
+  #       description: Issue description
+  #       required: true
     
     # secrets:
     #   JIRA_BASE_URL:
@@ -45,10 +46,11 @@ jobs:
       id: create
       uses: atlassian/gajira-create@v3
       with:
-        project: ${{ inputs.project }}
-        issuetype: ${{ inputs.type }}
-        summary: ${{ inputs.summary }}
-        description: ${{ inputs.description }}
+        project: STP #${{ inputs.project }}
+        issuetype: Bug #${{ inputs.type }}
+        summary: title #${{ inputs.summary }}
+        description: desc #${{ inputs.description }}
+        fields: '{"codeql_id": "1"}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
