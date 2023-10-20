@@ -50,7 +50,7 @@ jobs:
         issuetype: Bug #${{ inputs.type }}
         summary: title #${{ inputs.summary }}
         description: desc #${{ inputs.description }}
-        fields: '{"customfield_10043": "102"}'
+        fields: '{"customfield_10043": 102}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
