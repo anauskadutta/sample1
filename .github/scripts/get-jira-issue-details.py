@@ -22,15 +22,16 @@ jira_auth = (jira_username, jira_token)
 
 issue_details_response = requests.get(jira_url, params=jira_params, headers=jira_headers, auth=jira_auth)
 issue_json = issue_details_response.json()
-issue_list = issue_json['issues']
-issue_description_list = []
+print(issue_json) # testing printing
+# issue_list = issue_json['issues']
+# issue_description_list = []
 
-for issue in issue_list:
-  issue_description = issue["fields"]["description"]["content"][0]["content"][0]["text"]
-  issue_description_list.append(issue_description)
+# for issue in issue_list:
+#   issue_description = issue["fields"]["description"]["content"][0]["content"][0]["text"]
+#   issue_description_list.append(issue_description)
 
-if "https://github.com/anauskadutta/sample1/security/code-scanning/13" in issue_description_list:
-  print("Issue already exists")
+# if "https://github.com/anauskadutta/sample1/security/code-scanning/13" in issue_description_list:
+#   print("Issue already exists")
 
-else:
-  print("New issue")
+# else:
+#   print("New issue")
