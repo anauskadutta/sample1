@@ -28,11 +28,14 @@ jira_auth = (jira_username, jira_token)
 issue_details_response = requests.get(jira_url, params=jira_params, headers=jira_headers, auth=jira_auth)
 issue_json = issue_details_response.json()
 issue_list = issue_json['issues']
-issue_description_list = []
+# issue_description_list = []
+issue_codeql_list = []
 
 for issue in issue_list:
-  issue_description = issue["fields"]["description"]["content"][0]["content"][0]["text"]
-  issue_description_list.append(issue_description)
+  mapped_codeql_id = issue["fields"]["customfield_10043"]
+  issue_codeql_list.append(mapped_codeql_id)
+  # issue_description = issue["fields"]["description"]["content"][0]["content"][0]["text"]
+  # issue_description_list.append(issue_description)
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
@@ -46,31 +49,32 @@ headers = {'Accept': 'application/vnd.github+json',
 r = requests.get(url, headers=headers)
 
 def get_json(r):
-          if r.status_code == 200:             
-                    # store API response to variable
-                    alert_list = r.json()
-                    json_obj = {}
-                    json_obj['include'] = []
-                    
-                    ## iterating through the list of objects of CodeQL scan alerts
-                    for alert in alert_list:
-                              alert_dict = {}
-                              if alert['state'] == 'open':
-                                        alert_dict['title'] = alert['most_recent_instance']['message']['text']
-                                        alert_dict['body'] = alert['html_url']
-                                        if alert_dict['body'] in issue_description_list:
-                                                  continue
-                                        else:
-                                                  json_obj['include'].append(alert_dict)
-                              else:
-                                        continue
+  if r.status_code == 200:             
+    # store API response to variable
+    alert_list = r.json()
+    json_obj = {}
+    json_obj['include'] = []
+    
+    ## iterating through the list of objects of CodeQL scan alerts
+    for alert in alert_list:
+      alert_dict = {}
+      if alert['state'] == 'open':
+        # alert_dict['title'] = alert['most_recent_instance']['message']['text']
+        alert_dict['body'] = alert['html_url']
+        alert_dict['id'] = alert['number']
+        if alert_dict['id'] in issue_codeql_list:
+          continue
+        else:
+          json_obj['include'].append(alert_dict)
+      else:
+        continue
 
-                    json_data = json.dumps(json_obj)
-  
-          else:
-                    print(f"Status code: {r.status_code}")
-                    print(r.json())
-                    
-          return json_data
+    json_data = json.dumps(json_obj)
+
+  else:
+    print(f"Status code: {r.status_code}")
+    print(r.json())
+            
+  return json_data
 
 print(get_json(r))
