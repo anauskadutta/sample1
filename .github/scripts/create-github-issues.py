@@ -28,8 +28,8 @@ github_issue_json = github_issue_response.json()
 codeql_gh_issue_mapping_list = []
 
 for gh_issue in github_issue_json:
-  codeql_scan_alert_url = gh_issue['body']
-  codeql_gh_issue_mapping_list.append(codeql_scan_alert_url)
+  github_issue_title = gh_issue['title']
+  codeql_gh_issue_mapping_list.append(github_issue_title)
 
 ## Gets list of existing CodeQL scan alerts in a repo
 codeql_scan_url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
@@ -42,17 +42,17 @@ if codeql_scan_response.status_code == 200:
 
   for alert in alert_list:
     if alert['state'] == 'open':
-      if alert['html_url'] in codeql_gh_issue_mapping_list:
+      issue_title_prefix = "CodeQL scan alert #"
+      codeql_scan_id = alert['number']
+      issue_title = issue_title_prefix + str(codeql_scan_id)
+      if issue_title in codeql_gh_issue_mapping_list:
         print("Issue already exists")
         continue
       else:
         print("Creating GitHub issue...")
         alert_desc = alert['most_recent_instance']['message']['text']
         alert_url = alert['html_url']
-        codeql_scan_id = alert['number']
-        issue_title_prefix = "CodeQL scan alert #"
         issue_body_filler = " found in "
-        issue_title = issue_title_prefix + str(codeql_scan_id)
         issue_body = alert_desc + issue_body_filler + alert_url
         payload = {
           'title': issue_title,
