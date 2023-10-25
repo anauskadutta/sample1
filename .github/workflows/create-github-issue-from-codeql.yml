@@ -1,13 +1,14 @@
 name: Create GitHub Issue
 
 on: 
+  workflow_dispatch:
   workflow_call:
   push:
   #   branches: 
   #     - 'main'
     paths:
       - '**/create-github-issue-from-codeql.yml'
-  #     - '**.sh'
+      - '**/create-github-issues.py'
       
 env:
     GH_TOKEN: ${{ github.token }}
