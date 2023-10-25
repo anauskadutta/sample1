@@ -16,7 +16,7 @@ headers = {
   'Accept': 'application/vnd.github+json',
   'Authorization': "Bearer {}".format(token),
   'X-GitHub-Api-Version': '2022-11-28',
-  'Content-Type': 'application/x-www-form-urlencoded'
+  'Content-Type': 'application/json'
 }
 
 ## Gets list of body descriptions of existing issues in a repo
@@ -49,8 +49,13 @@ if codeql_scan_response.status_code == 200:
         print("Creating GitHub issue...")
         issue_title = "alert['most_recent_instance']['message']['text']"
         issue_body = "alert['html_url']"
-        data = '{"title": issue_title,"body": issue_body}'
-        post_response = requests.post(github_issue_url,headers=headers,data=data)
+        payload = {
+          'title': issue_title,
+          'body': 'issue_body'
+        }
+        json_payload = json.dumps(payload)
+        params = '{"title": issue_title,"body": issue_body}'
+        post_response = requests.post(github_issue_url,headers=headers,data=json_payload)
         if post_response.status_code == 201:
           print(f"GitHub issue is created: {post_response}")
         else:
