@@ -47,18 +47,19 @@ if codeql_scan_response.status_code == 200:
         continue
       else:
         print("Creating GitHub issue...")
-        issue_title = "alert['most_recent_instance']['message']['text']"
-        issue_body = "alert['html_url']"
+        issue_title = alert['most_recent_instance']['message']['text']
+        issue_body = alert['html_url']
         payload = {
           'title': issue_title,
           'body': 'issue_body'
         }
         json_payload = json.dumps(payload)
-        params = '{"title": issue_title,"body": issue_body}'
         post_response = requests.post(github_issue_url,headers=headers,data=json_payload)
         if post_response.status_code == 201:
-          print(f"GitHub issue is created: {post_response}")
+          print(f"Status code: {post_response.status_code}")
+          print("GitHub issue is created")
         else:
+          print("Issue creation in GitHub failed!!!")
           print(f"Status code: {post_response.status_code}")
           print(post_response.json())
     else:
