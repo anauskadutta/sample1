@@ -69,6 +69,9 @@ def get_json(r):
       else:
         continue
 
+    if json_obj['details'] == []:
+      json_obj = {}
+    
     json_data = json.dumps(json_obj)
 
   else:
