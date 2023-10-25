@@ -13,7 +13,7 @@ on:
         description: Type of Jira issue
         default: Bug
       codeql_alert_id:
-        type: number
+        type: string
         description: CodeQL Scan Alert ID
         required: true
       codeql_alert_name:
