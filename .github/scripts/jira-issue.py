@@ -53,7 +53,7 @@ def get_json(r):
     # store API response to variable
     alert_list = r.json()
     json_obj = {}
-    json_obj['include'] = []
+    json_obj['details'] = []
     
     ## iterating through the list of objects of CodeQL scan alerts
     for alert in alert_list:
@@ -65,7 +65,7 @@ def get_json(r):
         if alert_dict['id'] in issue_codeql_list:
           continue
         else:
-          json_obj['include'].append(alert_dict)
+          json_obj['details'].append(alert_dict)
       else:
         continue
 
