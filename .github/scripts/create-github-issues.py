@@ -55,6 +55,9 @@ if codeql_scan_response.status_code == 200:
         post_response = requests.post(github_issue_url,headers=headers,data=data)
         if post_response.status_code == 201:
           print(f"GitHub issue is created: {post_response}")
+        else:
+          print(f"Status code: {post_response.status_code}")
+          print(post_response.json())
     else:
       continue
   
