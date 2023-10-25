@@ -59,9 +59,9 @@ def get_json(r):
     for alert in alert_list:
       alert_dict = {}
       if alert['state'] == 'open':
-        # alert_dict['title'] = alert['most_recent_instance']['message']['text']
-        alert_dict['body'] = alert['html_url']
         alert_dict['id'] = alert['number']
+        alert_dict['name'] = alert['most_recent_instance']['message']['text']
+        alert_dict['url'] = alert['html_url']
         if alert_dict['id'] in issue_codeql_list:
           continue
         else:
