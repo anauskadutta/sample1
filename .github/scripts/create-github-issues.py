@@ -15,7 +15,8 @@ token = os.environ['GH_TOKEN']
 headers = {
   'Accept': 'application/vnd.github+json',
   'Authorization': "Bearer {}".format(token),
-  'X-GitHub-Api-Version': '2022-11-28'
+  'X-GitHub-Api-Version': '2022-11-28',
+  'Content-Type': 'application/x-www-form-urlencoded'
 }
 
 ## Gets list of body descriptions of existing issues in a repo
