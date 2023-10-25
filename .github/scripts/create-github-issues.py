@@ -48,7 +48,13 @@ if codeql_scan_response.status_code == 200:
         print("Creating GitHub issue...")
         issue_title = alert['most_recent_instance']['message']['text']
         issue_body = alert['html_url']
-        issue_json = '{"title": issue_title,"body": issue_body}'
+        issue_json = {
+            "fields": {
+                "title": issue_title,
+                "body": issue_body
+            }
+        }
+        # issue_json = '{"title": issue_title,"body": issue_body}'
         post_response = requests.post(github_issue_url,headers=headers,json=issue_json)
         if post_response.status_code == 201:
           print(f"GitHub issue is created: {post_response}")
