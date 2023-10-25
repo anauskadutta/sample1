@@ -8,7 +8,7 @@ on:
         type: string
         description: Jira Project Key
         required: true
-      issuetype:
+      issue_type:
         type: string
         description: Type of Jira issue
         default: Bug
@@ -68,7 +68,7 @@ jobs:
       uses: atlassian/gajira-create@v3
       with:
         project: ${{ inputs.project }}
-        issuetype: ${{ inputs.type }}
+        issuetype: ${{ inputs.issue_type }}
         summary: 'CodeQL Scan Alert 103 from GitHub repo ${{ github.event.repository.name }}'
         description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
         # fields: '{"customfield_10043": 102}'
