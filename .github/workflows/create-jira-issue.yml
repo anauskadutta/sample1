@@ -2,24 +2,45 @@ name: Jira Issue
 
 on: 
   workflow_dispatch:
-  # workflow_call:
-  #   inputs:
-  #     project:
-  #       type: string
-  #       description: Jira Project Key
-  #       required: true
-  #     type:
-  #       type: string
-  #       description: Type of Jira issue
-  #       default: Bug
-  #     summary:
-  #       type: string
-  #       description: Issue summary
-  #       required: true
-  #     description:
-  #       type: string
-  #       description: Issue description
-  #       required: true
+  workflow_call:
+    inputs:
+      project:
+        type: string
+        description: Jira Project Key
+        required: true
+      issuetype:
+        type: string
+        description: Type of Jira issue
+        default: Bug
+      codeql_alert_id:
+        type: number
+        description: CodeQL Scan Alert ID
+        required: true
+        default: 0
+      codeql_alert_name:
+        type: string
+        description: CodeQL Scan Alert Name
+        required: true
+      codeql_alert_url:
+        type: string
+        description: CodeQL Scan Alert URL
+        required: true
+      # project:
+      #   type: string
+      #   description: Jira Project Key
+      #   required: true
+      # type:
+      #   type: string
+      #   description: Type of Jira issue
+      #   default: Bug
+      # summary:
+      #   type: string
+      #   description: Issue summary
+      #   required: true
+      # description:
+      #   type: string
+      #   description: Issue description
+      #   required: true
     
     # secrets:
     #   JIRA_BASE_URL:
@@ -33,7 +54,7 @@ jobs:
   create_issue:
     runs-on: ubuntu-latest
     name: Jira Example
-    
+  
     steps:
     - name: Login
       uses: atlassian/gajira-login@v3
@@ -46,11 +67,13 @@ jobs:
       id: create
       uses: atlassian/gajira-create@v3
       with:
-        project: STP #${{ inputs.project }}
-        issuetype: Bug #${{ inputs.type }}
-        summary: title #${{ inputs.summary }}
-        description: desc #${{ inputs.description }}
-        fields: '{"customfield_10043": 102}'
+        project: ${{ inputs.project }}
+        issuetype: ${{ inputs.type }}
+        summary: 'CodeQL Scan Alert 103 from GitHub repo ${{ github.event.repository.name }}'
+        description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
+        # fields: '{"customfield_10043": 102}'
+        # fields: '{"customfield_10043": ${{ inputs.codeql_alert_id }}}'
+        fields: '{"customfield_10043": 103}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
