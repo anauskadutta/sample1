@@ -16,7 +16,6 @@ on:
         type: number
         description: CodeQL Scan Alert ID
         required: true
-        default: 0
       codeql_alert_name:
         type: string
         description: CodeQL Scan Alert Name
@@ -25,14 +24,7 @@ on:
         type: string
         description: CodeQL Scan Alert URL
         required: true
-      # project:
-      #   type: string
-      #   description: Jira Project Key
-      #   required: true
-      # type:
-      #   type: string
-      #   description: Type of Jira issue
-      #   default: Bug
+ 
       # summary:
       #   type: string
       #   description: Issue summary
@@ -41,14 +33,6 @@ on:
       #   type: string
       #   description: Issue description
       #   required: true
-    
-    # secrets:
-    #   JIRA_BASE_URL:
-    #     required: true
-    #   JIRA_USER_EMAIL:
-    #     required: true
-    #   JIRA_API_TOKEN:
-    #     required: true
 
 jobs:
   create_issue:
@@ -69,11 +53,10 @@ jobs:
       with:
         project: ${{ inputs.project }}
         issuetype: ${{ inputs.issue_type }}
-        summary: 'CodeQL Scan Alert 103 from GitHub repo ${{ github.event.repository.name }}'
+        summary: 'CodeQL Scan Alert ${{ fromJSON(inputs.codeql_alert_id) }} from GitHub repo "${{ github.event.repository.url }}"'
         description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
         # fields: '{"customfield_10043": 102}'
-        # fields: '{"customfield_10043": ${{ inputs.codeql_alert_id }}}'
-        fields: '{"customfield_10043": 103}'
+        fields: '{"customfield_10043": ${{ fromJSON(inputs.codeql_alert_id) }}}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
