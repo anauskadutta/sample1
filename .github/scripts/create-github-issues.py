@@ -12,9 +12,7 @@ import json
 token = os.environ['GH_TOKEN']
 
 # assign headers
-headers = {'Accept': 'application/vnd.github.v3+json'}
-
-gh_issue_post_headers = {
+headers = {
   'Accept': 'application/vnd.github+json',
   'Authorization': "Bearer {}".format(token),
   'X-GitHub-Api-Version': '2022-11-28'
@@ -54,7 +52,7 @@ if codeql_scan_response.status_code == 200:
           'title': issue_title,
           'body': issue_body
         }
-        post_response = requests.post(github_issue_url,headers=gh_issue_post_headers,data=data)
+        post_response = requests.post(github_issue_url,headers=headers,data=data)
         if post_response.status_code == 201:
           print(f"GitHub issue is created: {post_response}")
     else:
