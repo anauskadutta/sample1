@@ -1,3 +1,5 @@
+## This script is used to create Jira bugs from CodeQL scan vulnerability alerts.
+
 # import os module
 import os
 
