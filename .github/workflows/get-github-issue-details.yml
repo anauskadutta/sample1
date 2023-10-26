@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - '**/get-github-issue-details.yml'
+      - '**/github-issues.py'
 
 name: Get GitHub issue details
 
