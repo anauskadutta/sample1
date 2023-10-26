@@ -35,7 +35,7 @@ jira_issue_list = issue_json['issues']
 issue_github_list = []
 
 for jira_issue in jira_issue_list:
-  mapped_github_issue_id = issue["fields"]["customfield_10044"]
+  mapped_github_issue_id = jira_issue["fields"]["customfield_10044"]
   issue_github_list.append(mapped_github_issue_id)
 
 ##### GITHUB ISSUE DETAILS #####
