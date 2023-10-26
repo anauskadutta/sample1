@@ -24,15 +24,10 @@ on:
         type: string
         description: CodeQL Scan Alert URL
         required: true
- 
-      # summary:
-      #   type: string
-      #   description: Issue summary
-      #   required: true
-      # description:
-      #   type: string
-      #   description: Issue description
-      #   required: true
+      codeql_alert_severity:
+        type: string
+        description: CodeQL Scan Alert Severity
+        required: true
 
 jobs:
   create_issue:
@@ -53,7 +48,7 @@ jobs:
       with:
         project: ${{ inputs.project }}
         issuetype: ${{ inputs.issue_type }}
-        summary: 'CodeQL Scan Alert ${{ fromJSON(inputs.codeql_alert_id) }} from GitHub repo "${{ github.event.repository.url }}"'
+        summary: 'CodeQL Vulnerability (${{ inputs.codeql_alert_severity }}): ${{ inputs.codeql_alert_name }}'
         description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
         # fields: '{"customfield_10043": 102}'
         fields: '{"customfield_10043": ${{ fromJSON(inputs.codeql_alert_id) }}}'
