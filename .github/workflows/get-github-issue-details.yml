@@ -1,9 +1,9 @@
 on:
   workflow_call:
   workflow_dispatch:
-  # push:
-  #   paths: 
-  #     - '**/get-github-issue-details.yml'
+  push:
+    paths: 
+      - '**/get-github-issue-details.yml'
   #     - '**/github-issues.py'
 
 name: Get GitHub issue details
@@ -54,7 +54,7 @@ jobs:
       fail-fast: true          
     with:
       project: STP
-      codeql_alert_id: ${{ matrix['details'].id }}
-      codeql_alert_name: ${{ matrix['details'].name }}
-      codeql_alert_url: ${{ matrix['details'].url }}
+      github_issue_id: ${{ matrix['details'].id }}
+      github_issue_name: ${{ matrix['details'].name }}
+      github_issue_url: ${{ matrix['details'].url }}
     secrets: inherit
