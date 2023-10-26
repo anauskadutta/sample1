@@ -1,10 +1,9 @@
 on:
   workflow_call:
   workflow_dispatch:
-  # push:
-  #   paths: 
-  #     - '**/get-github-issue-details.yml'
-  #     - '**/get-jira-issue-details.py'
+  push:
+    paths: 
+      - '**/get-github-issue-details.yml'
 
 name: Get GitHub issue details
 
@@ -35,15 +34,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install requests
-
-    - name: Testing python jira call
-      run: python ./.github/scripts/get-jira-issue-details.py
     
-  #   - name: Execute python script
-  #     id: get-issue-json
-  #     run: |
-  #       output=$(python ./.github/scripts/github-issues.py)
-  #       echo "json_data=${output}" >> $GITHUB_OUTPUT
+    - name: Execute python script
+      id: get-issue-json
+      run: |
+        output=$(python ./.github/scripts/github-issues.py)
+        echo "json_data=${output}" >> $GITHUB_OUTPUT
+
+    - name: Testing python script
+      run: echo ${{ steps.get-issue-json.outputs.json_data }}
 
   # create:
   #   needs: build
