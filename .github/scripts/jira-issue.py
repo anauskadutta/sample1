@@ -30,14 +30,11 @@ jira_auth = (jira_username, jira_token)
 issue_details_response = requests.get(jira_url, params=jira_params, headers=jira_headers, auth=jira_auth)
 issue_json = issue_details_response.json()
 issue_list = issue_json['issues']
-# issue_description_list = []
 issue_codeql_list = []
 
 for issue in issue_list:
   mapped_codeql_id = issue["fields"]["customfield_10043"]
   issue_codeql_list.append(mapped_codeql_id)
-  # issue_description = issue["fields"]["description"]["content"][0]["content"][0]["text"]
-  # issue_description_list.append(issue_description)
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
