@@ -1,10 +1,10 @@
 on:
   workflow_call:
   workflow_dispatch:
-  push:
-    paths: 
-      - '**/get-github-issue-details.yml'
-      - '**/get-jira-issue-details.py'
+  # push:
+  #   paths: 
+  #     - '**/get-github-issue-details.yml'
+  #     - '**/get-jira-issue-details.py'
 
 name: Get GitHub issue details
 
