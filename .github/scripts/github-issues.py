@@ -1,10 +1,44 @@
-## This script gets details of GitHub Issues and returns the required json as output
+## This script gets details of GitHub Issues and returns the required json as output which is used to create Jira bugs.
+
+# import os module
+import os
 
 # import requests module
 import requests
 
 # import json module
 import json
+
+##### JIRA DETAILS #####
+
+jira_username = os.environ['JIRA_USER_EMAIL']
+jira_token = os.environ['JIRA_API_TOKEN']
+
+jira_url = 'https://jsjiraapp.atlassian.net/rest/api/3/search'
+
+jira_params = {
+  'jql': 'project=STP',
+  'issuetype': 'Bug'
+}
+
+# Set up headers for the JIRA request
+jira_headers = {
+    'Content-Type': 'application/json',
+}
+
+# Set up authentication for the JIRA request
+jira_auth = (jira_username, jira_token)
+
+issue_details_response = requests.get(jira_url, params=jira_params, headers=jira_headers, auth=jira_auth)
+issue_json = issue_details_response.json()
+jira_issue_list = issue_json['issues']
+issue_github_list = []
+
+for jira_issue in jira_issue_list:
+  mapped_github_issue_id = issue["fields"]["customfield_10044"]
+  issue_github_list.append(mapped_github_issue_id)
+
+##### GITHUB ISSUE DETAILS #####
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/issues'
@@ -15,18 +49,23 @@ headers = {'Accept': 'application/vnd.github.v3+json'}
 # assign the requests method
 r = requests.get(url, headers=headers)
 
-def get_github_issue_json(r):
+def get_json(r):
   if r.status_code == 200:
-    issue_list = r.json()
+    gh_issue_list = r.json()
     json_obj = {}
     json_obj['details'] = []
 
-    for issue in issue_list:
+    ## iterating through the list of objects of GitHub issues
+    for gh_issue in gh_issue_list:
       issue_obj = {}
-      if issue['state'] == 'open':
-        issue_obj['title'] = issue['title']
-        issue_obj['body'] = issue['html_url']
-        json_obj['details'].append(issue_obj)
+      if gh_issue['state'] == 'open':
+        issue_obj['id'] = gh_issue['number']
+        issue_obj['name'] = gh_issue['title']
+        issue_obj['url'] = gh_issue['html_url']
+        if issue_obj['id'] in issue_github_list:
+          continue
+        else:
+          json_obj['details'].append(issue_obj)
       else:
         continue
 
@@ -41,4 +80,4 @@ def get_github_issue_json(r):
 
   return json_data
 
-print(get_github_issue_json(r))
+print(get_json(r))
