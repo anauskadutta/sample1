@@ -62,6 +62,7 @@ def get_json(r):
         alert_dict['id'] = alert['number']
         alert_dict['name'] = alert['most_recent_instance']['message']['text']
         alert_dict['url'] = alert['html_url']
+        alert_dict['severity'] = alert['rule']['severity']
         if alert_dict['id'] in issue_codeql_list:
           continue
         else:
