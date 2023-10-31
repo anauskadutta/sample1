@@ -12,10 +12,6 @@ on:
         type: string
         description: Type of Jira issue
         default: Bug
-      # codeql_alert_id:
-      #   type: string
-      #   description: CodeQL Scan Alert ID
-      #   required: true
       title:
         type: string
         description: Title of the Jira issue
@@ -24,10 +20,6 @@ on:
         type: string
         description: Description of the Jira issue
         required: true
-      # codeql_alert_severity:
-      #   type: string
-      #   description: CodeQL Scan Alert Severity
-      #   required: true
 
 jobs:
   create_issue:
@@ -50,10 +42,6 @@ jobs:
         issuetype: ${{ inputs.issue_type }}
         summary: ${{ inputs.title }}
         description: ${{ inputs.description }}
-        
-        # summary: 'CodeQL Vulnerability (${{ inputs.codeql_alert_severity }}): ${{ inputs.codeql_alert_name }}'
-        # description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
-        # fields: '{"customfield_10043": ${{ fromJSON(inputs.codeql_alert_id) }}}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
