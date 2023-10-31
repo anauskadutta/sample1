@@ -1,4 +1,4 @@
-## This script is used to create Jira bugs from CodeQL scan vulnerability alerts.
+## This script is used to create Jira bugs from CodeQL scan alerts.
 
 # import os module
 import os
@@ -32,9 +32,15 @@ issue_json = issue_details_response.json()
 issue_list = issue_json['issues']
 issue_codeql_list = []
 
+## Checking for duplicate issues with custom field as CodeQL ID
+# for issue in issue_list:
+#   mapped_codeql_id = issue["fields"]["customfield_10043"]
+#   issue_codeql_list.append(mapped_codeql_id)
+
+## Checking for duplicate issues with title
 for issue in issue_list:
-  mapped_codeql_id = issue["fields"]["customfield_10043"]
-  issue_codeql_list.append(mapped_codeql_id)
+  jira_issue_title = issue["fields"]["summary"]
+  issue_codeql_list.append(jira_issue_title)
 
 # store API url
 url = 'https://api.github.com/repos/anauskadutta/sample1/code-scanning/alerts'
@@ -51,18 +57,34 @@ def get_json(r):
   if r.status_code == 200:             
     # store API response to variable
     alert_list = r.json()
+    
     json_obj = {}
     json_obj['details'] = []
-    
+    summary_prefix = 'CodeQL ('
+    summary_filler = ') '
+    summary_line = ' Line '
+    summary_colon = ': '
+    summary_hyphen = ' - '
+    desc_prefix = 'CodeQL scan alert "'
+    desc_filler = '" found in '
+
     ## iterating through the list of objects of CodeQL scan alerts
     for alert in alert_list:
       alert_dict = {}
       if alert['state'] == 'open':
-        alert_dict['id'] = alert['number']
-        alert_dict['name'] = alert['most_recent_instance']['message']['text']
-        alert_dict['url'] = alert['html_url']
-        alert_dict['severity'] = alert['rule']['severity']
-        if alert_dict['id'] in issue_codeql_list:
+
+        url = alert['html_url']
+        severity = alert['rule']['severity']
+        rule_desc = alert['rule']['description']
+        location = alert['most_recent_instance']['location']['path']
+        line_no = alert['most_recent_instance']['location']['start_line']
+        alert_name = alert['most_recent_instance']['message']['text']
+        
+        alert_dict['name'] = summary_prefix + severity + summary_filler + location + summary_line + line_no + summary_colon + rule_desc + summary_hyphen + alert_name 
+        alert_dict['description'] = desc_prefix + alert_name + desc_filler + url
+       
+        if alert_dict['name'] in issue_codeql_list:
+          print('Issue already exists!')
           continue
         else:
           json_obj['details'].append(alert_dict)
