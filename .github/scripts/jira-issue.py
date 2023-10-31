@@ -80,7 +80,7 @@ def get_json(r):
         line_no = alert['most_recent_instance']['location']['start_line']
         alert_name = alert['most_recent_instance']['message']['text']
         
-        alert_dict['name'] = summary_prefix + severity + summary_filler + location + summary_line + line_no + summary_colon + rule_desc + summary_hyphen + alert_name 
+        alert_dict['name'] = summary_prefix + severity + summary_filler + location + summary_line + str(line_no) + summary_colon + rule_desc + summary_hyphen + alert_name 
         alert_dict['description'] = desc_prefix + alert_name + desc_filler + url
        
         if alert_dict['name'] in issue_codeql_list:
