@@ -12,22 +12,22 @@ on:
         type: string
         description: Type of Jira issue
         default: Bug
-      codeql_alert_id:
+      # codeql_alert_id:
+      #   type: string
+      #   description: CodeQL Scan Alert ID
+      #   required: true
+      title:
         type: string
-        description: CodeQL Scan Alert ID
+        description: Title of the Jira issue
         required: true
-      codeql_alert_name:
+      description:
         type: string
-        description: CodeQL Scan Alert Name
+        description: Description of the Jira issue
         required: true
-      codeql_alert_url:
-        type: string
-        description: CodeQL Scan Alert URL
-        required: true
-      codeql_alert_severity:
-        type: string
-        description: CodeQL Scan Alert Severity
-        required: true
+      # codeql_alert_severity:
+      #   type: string
+      #   description: CodeQL Scan Alert Severity
+      #   required: true
 
 jobs:
   create_issue:
@@ -48,10 +48,12 @@ jobs:
       with:
         project: ${{ inputs.project }}
         issuetype: ${{ inputs.issue_type }}
-        summary: 'CodeQL Vulnerability (${{ inputs.codeql_alert_severity }}): ${{ inputs.codeql_alert_name }}'
-        description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
-        # fields: '{"customfield_10043": 102}'
-        fields: '{"customfield_10043": ${{ fromJSON(inputs.codeql_alert_id) }}}'
+        summary: ${{ inputs.title }}
+        description: ${{ inputs.description }}
+        
+        # summary: 'CodeQL Vulnerability (${{ inputs.codeql_alert_severity }}): ${{ inputs.codeql_alert_name }}'
+        # description: 'CodeQL scan alert "${{ inputs.codeql_alert_name }}" found in ${{ inputs.codeql_alert_url }}'
+        # fields: '{"customfield_10043": ${{ fromJSON(inputs.codeql_alert_id) }}}'
 
     - name: Log created issue
       run: echo "Issue ${{ steps.create.outputs.issue }} was created"        
