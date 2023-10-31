@@ -84,7 +84,6 @@ def get_json(r):
         alert_dict['description'] = desc_prefix + alert_name + desc_filler + url
        
         if alert_dict['name'] in issue_codeql_list:
-          print('Issue already exists!')
           continue
         else:
           json_obj['details'].append(alert_dict)
