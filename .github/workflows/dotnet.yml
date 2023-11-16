@@ -22,3 +22,7 @@ jobs:
     - name: Build the Docker image
       # working-directory: sample1/
       run: docker build .    
+
+    - name: Execute python script
+      # id: get-issue-json
+      run: python ./.github/scripts/get-jira-issue-details.py
