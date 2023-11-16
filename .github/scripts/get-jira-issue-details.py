@@ -5,10 +5,10 @@ import json
 jira_username = os.environ['JIRA_USER_EMAIL']
 jira_token = os.environ['JIRA_API_TOKEN']
 
-# jira_url = 'https://jsjiraapp.atlassian.net/rest/api/3/search'
+jira_url = 'https://jsjiraapp.atlassian.net/rest/api/3/search'
 
-jira_base_url = os.environ['JIRA_BASE_URL']
-jira_url = f"{jira_base_url}/rest/api/3/search"
+# jira_base_url = os.environ['JIRA_BASE_URL']
+# jira_url = f"{jira_base_url}/rest/api/3/search"
 
 print(jira_url)
 
