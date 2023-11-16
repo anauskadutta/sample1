@@ -13,12 +13,6 @@ on:
       - '**github-issue**'
       - '**codeql**'
 
-env:
-  GH_TOKEN: ${{ github.token }}
-  JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-  JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-  JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +22,3 @@ jobs:
     - name: Build the Docker image
       # working-directory: sample1/
       run: docker build .    
-
-    - name: Execute python script
-      # id: get-issue-json
-      run: python ./.github/scripts/get-jira-issue-details.py
